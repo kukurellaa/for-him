@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>For Tharuk</title>
 
 <style>
+
 /* =========================================================
-   BASIC PAGE
+   PAGE
 ========================================================= */
 
 * {
@@ -24,9 +24,13 @@ html, body {
 
 body {
     font-family: Georgia, "Times New Roman", serif;
-    background: #526b3c;
-    color: #fff;
+    color: white;
 }
+
+
+/* =========================================================
+   GARDEN BACKGROUND
+========================================================= */
 
 .garden {
     position: relative;
@@ -34,173 +38,300 @@ body {
     height: 100vh;
     overflow: hidden;
 
-    /* layered grass texture */
     background:
-        radial-gradient(circle at 15% 25%, rgba(255,255,255,.035) 0 2px, transparent 3px),
-        radial-gradient(circle at 75% 70%, rgba(20,45,15,.10) 0 2px, transparent 3px),
-        radial-gradient(circle at 45% 50%, rgba(255,255,255,.025) 0 1px, transparent 3px),
-        linear-gradient(135deg, #6e8750, #536d3d 55%, #455e34);
+        radial-gradient(
+            ellipse at 20% 15%,
+            rgba(147,170,94,.25),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at 80% 85%,
+            rgba(27,56,27,.28),
+            transparent 42%
+        ),
+        linear-gradient(
+            135deg,
+            #738b4e 0%,
+            #5f7944 35%,
+            #4f6d3c 70%,
+            #3f5d35 100%
+        );
+}
 
-    background-size:
-        38px 38px,
-        52px 52px,
-        27px 27px,
-        100% 100%;
+
+/* soft sunlight */
+
+.garden::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+
+    background:
+        radial-gradient(
+            ellipse at 35% 20%,
+            rgba(255,245,191,.14),
+            transparent 38%
+        );
+
+    pointer-events: none;
 }
 
 
 /* =========================================================
-   TOP RIGHT MESSAGE
+   GRASS TEXTURE
+========================================================= */
+
+.grass {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .8;
+}
+
+.blade {
+    position: absolute;
+    width: 2px;
+    height: 18px;
+
+    background: linear-gradient(
+        to top,
+        rgba(38,71,34,.65),
+        rgba(121,151,73,.8)
+    );
+
+    border-radius: 100%;
+
+    transform-origin: bottom;
+}
+
+
+/* =========================================================
+   TOP LEFT INTRODUCTION
 ========================================================= */
 
 .introduction {
     position: absolute;
-    top: 42px;
-    right: 55px;
-    width: min(430px, 42vw);
-    text-align: right;
-    z-index: 20;
+
+    left: 55px;
+    top: 43px;
+
+    width: 430px;
+
+    z-index: 100;
 }
 
 .introduction h1 {
     margin: 0;
-    font-size: clamp(42px, 5vw, 72px);
+
+    font-size: clamp(46px, 5.5vw, 76px);
+
     font-weight: normal;
+
     letter-spacing: -2px;
-    text-shadow: 0 3px 15px rgba(0,0,0,.22);
+
+    text-shadow:
+        0 3px 14px rgba(0,0,0,.25);
 }
 
 .introduction p {
     margin: 12px 0 0;
+
+    width: 390px;
+
     font-size: 17px;
-    line-height: 1.55;
-    color: rgba(255,255,255,.92);
-    text-shadow: 0 2px 8px rgba(0,0,0,.20);
+
+    line-height: 1.65;
+
+    color: rgba(255,255,255,.95);
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.28);
 }
 
 
 /* =========================================================
-   INSTRUCTIONS BOX
+   INSTRUCTION BOX
 ========================================================= */
 
 .instructions {
     position: absolute;
+
     left: 35px;
     bottom: 32px;
+
     width: 315px;
-    padding: 19px 23px;
 
-    background: rgba(244, 239, 221, .91);
-    color: #3f4c32;
+    padding: 20px 23px;
 
-    border-radius: 12px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(249,245,227,.96),
+            rgba(232,224,198,.94)
+        );
 
-    z-index: 30;
+    color: #3e4b32;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.23),
+        inset 0 1px 0 rgba(255,255,255,.7);
+
+    z-index: 200;
 }
 
 .instructions strong {
     display: block;
+
     font-size: 19px;
+
     margin-bottom: 8px;
 }
 
 .instructions p {
     margin: 0;
+
     font-size: 15px;
-    line-height: 1.55;
+
+    line-height: 1.6;
 }
 
 
 /* =========================================================
-   FLOWERS
+   FLOWER BASE
 ========================================================= */
 
 .flower {
     position: absolute;
+
     width: 190px;
-    height: 220px;
+    height: 235px;
 
     cursor: pointer;
-    user-select: none;
 
-    transform-origin: center center;
+    z-index: 20;
 
     transition:
         transform .35s ease,
         filter .35s ease;
-
-    z-index: 5;
 }
 
 .flower:hover {
-    transform: scale(1.035);
+    transform: scale(1.045);
 }
 
 .flower.locked {
-    filter: saturate(.82) brightness(.94);
-}
-
-.flower.unlocked {
-    filter: saturate(1.05);
+    filter: saturate(.85);
 }
 
 
-/* stems */
+/* =========================================================
+   STEMS
+========================================================= */
 
 .stem {
     position: absolute;
+
+    left: 93px;
+    top: 60px;
+
     width: 7px;
-    height: 145px;
-
-    left: 94px;
-    top: 63px;
-
-    background: linear-gradient(
-        90deg,
-        #36552d,
-        #607a3d,
-        #344f2b
-    );
+    height: 155px;
 
     border-radius: 100%;
-    transform: rotate(-5deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            #2f4f2b,
+            #658245,
+            #35562e
+        );
+
+    box-shadow:
+        2px 4px 6px rgba(0,0,0,.15);
+
     transform-origin: top;
 }
 
 
-/* leaves */
+/* =========================================================
+   LEAVES
+========================================================= */
 
 .leaf {
     position: absolute;
-    width: 52px;
-    height: 25px;
 
-    background: linear-gradient(
-        135deg,
-        #718c48,
-        #385d32
-    );
+    width: 60px;
+    height: 29px;
 
     border-radius: 100% 0 100% 0;
 
-    transform-origin: right center;
+    background:
+        linear-gradient(
+            135deg,
+            #78934b,
+            #3c6034 70%
+        );
 
     box-shadow:
-        inset 2px 2px 4px rgba(255,255,255,.12),
-        2px 4px 5px rgba(0,0,0,.15);
+        inset 2px 2px 5px rgba(255,255,255,.14),
+        3px 4px 7px rgba(0,0,0,.16);
 }
 
 .leaf.one {
-    left: 43px;
-    top: 118px;
+    left: 33px;
+    top: 120px;
     transform: rotate(20deg);
 }
 
 .leaf.two {
     left: 98px;
-    top: 94px;
-    transform: rotate(164deg);
+    top: 96px;
+    transform: rotate(160deg);
+}
+
+
+/* leaf veins */
+
+.leaf::after {
+    content: "";
+
+    position: absolute;
+
+    width: 45px;
+    height: 1px;
+
+    background: rgba(214,230,157,.28);
+
+    left: 8px;
+    top: 14px;
+
+    transform: rotate(-8deg);
+}
+
+
+/* =========================================================
+   FLOWER LABELS
+========================================================= */
+
+.flower-name {
+    position: absolute;
+
+    left: 0;
+    top: 178px;
+
+    width: 190px;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    color: white;
+
+    text-shadow:
+        0 2px 7px rgba(0,0,0,.6);
 }
 
 
@@ -209,52 +340,102 @@ body {
 ========================================================= */
 
 .lantana {
-    left: 15%;
-    top: 43%;
+    left: 14%;
+    top: 46%;
 }
 
 .lantana .flower-head {
     position: absolute;
-    left: 38px;
-    top: 12px;
-    width: 115px;
-    height: 105px;
+
+    left: 30px;
+    top: 6px;
+
+    width: 130px;
+    height: 115px;
 }
 
-.lantana .mini {
+
+/* each tiny lantana flower */
+
+.lantana-flower {
     position: absolute;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
+
+    width: 38px;
+    height: 38px;
 }
 
-.lantana .mini::before,
-.lantana .mini::after {
-    content: "";
+
+/* four rounded petals */
+
+.lantana-flower span {
     position: absolute;
+
     width: 17px;
-    height: 25px;
+    height: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffc3d0,
+            #e982a0
+        );
+
+    border-radius: 60% 60% 48% 48%;
+
+    left: 10px;
+    top: 1px;
+
+    transform-origin: 8px 19px;
+
+    box-shadow:
+        0 2px 3px rgba(0,0,0,.15);
+}
+
+.lantana-flower span:nth-child(2) {
+    transform: rotate(90deg);
+}
+
+.lantana-flower span:nth-child(3) {
+    transform: rotate(180deg);
+}
+
+.lantana-flower span:nth-child(4) {
+    transform: rotate(270deg);
+}
+
+
+/* yellow centre */
+
+.lantana-flower i {
+    position: absolute;
+
+    width: 10px;
+    height: 10px;
+
     border-radius: 50%;
-    background: #efa4ba;
-    left: 8px;
-    top: -4px;
-    transform-origin: 8px 21px;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff0a2,
+            #e7b92f
+        );
+
+    left: 14px;
+    top: 14px;
+
+    z-index: 4;
 }
 
-.lantana .mini::after {
-    transform: rotate(72deg);
-}
 
-.lantana .mini {
-    background: #f2c34c;
-    box-shadow: 0 2px 4px rgba(0,0,0,.18);
-}
+/* natural cluster */
 
-.lantana .m1 { left: 35px; top: 4px; }
-.lantana .m2 { left: 4px; top: 25px; }
-.lantana .m3 { left: 65px; top: 28px; }
-.lantana .m4 { left: 26px; top: 53px; }
-.lantana .m5 { left: 73px; top: 62px; }
+.lf1 { left: 42px; top: 5px; }
+.lf2 { left: 12px; top: 27px; }
+.lf3 { left: 71px; top: 25px; }
+.lf4 { left: 34px; top: 52px; }
+.lf5 { left: 82px; top: 58px; }
+.lf6 { left: 55px; top: 37px; }
 
 
 /* =========================================================
@@ -263,85 +444,107 @@ body {
 
 .chincherinchee {
     left: 39%;
-    top: 25%;
-}
-
-.chincherinchee .stem {
-    height: 155px;
+    top: 28%;
 }
 
 .chincherinchee .flower-head {
     position: absolute;
-    left: 46px;
-    top: 5px;
-    width: 105px;
-    height: 115px;
+
+    left: 40px;
+    top: 4px;
+
+    width: 120px;
+    height: 125px;
 }
 
-/* each little white flower */
-.chincherinchee .small-flower {
+
+/* little four-petal white flowers */
+
+.small-white {
     position: absolute;
-    width: 42px;
-    height: 42px;
+
+    width: 45px;
+    height: 45px;
 }
 
-.chincherinchee .small-flower span {
+.small-white span {
     position: absolute;
-    width: 16px;
+
+    width: 15px;
     height: 25px;
 
-    background: linear-gradient(
-        135deg,
-        #ffffff,
-        #e8e9df
-    );
+    left: 15px;
+    top: 0;
 
-    border-radius: 60% 60% 45% 45%;
-    left: 13px;
-    top: 1px;
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #e7e9dd
+        );
 
-    transform-origin: 8px 20px;
+    border-radius: 70% 70% 50% 50%;
+
+    transform-origin: 7px 21px;
 
     box-shadow:
-        0 1px 3px rgba(0,0,0,.13);
+        0 2px 4px rgba(0,0,0,.15);
 }
 
-.chincherinchee .small-flower span:nth-child(2) {
+.small-white span:nth-child(2) {
     transform: rotate(90deg);
 }
 
-.chincherinchee .small-flower span:nth-child(3) {
+.small-white span:nth-child(3) {
     transform: rotate(180deg);
 }
 
-.chincherinchee .small-flower span:nth-child(4) {
+.small-white span:nth-child(4) {
     transform: rotate(270deg);
 }
 
-.chincherinchee .small-flower i {
+.small-white i {
     position: absolute;
-    width: 10px;
-    height: 10px;
+
+    width: 9px;
+    height: 9px;
+
     border-radius: 50%;
-    background: #d8b54b;
-    left: 16px;
-    top: 16px;
-    z-index: 2;
+
+    background: #d6ad3f;
+
+    left: 18px;
+    top: 18px;
+
+    z-index: 5;
 }
 
-.chincherinchee .f1 {
-    left: 4px;
-    top: 17px;
+
+/* clustered instead of one giant flower */
+
+.c1 {
+    left: 10px;
+    top: 20px;
 }
 
-.chincherinchee .f2 {
-    left: 43px;
-    top: 4px;
+.c2 {
+    left: 45px;
+    top: 2px;
 }
 
-.chincherinchee .f3 {
-    left: 35px;
-    top: 48px;
+.c3 {
+    left: 70px;
+    top: 35px;
+}
+
+.c4 {
+    left: 31px;
+    top: 60px;
+}
+
+.c5 {
+    left: 79px;
+    top: 70px;
 }
 
 
@@ -350,230 +553,238 @@ body {
 ========================================================= */
 
 .rose {
-    left: 66%;
-    top: 48%;
+    left: 64%;
+    top: 53%;
 }
 
 .rose .flower-head {
     position: absolute;
-    width: 128px;
-    height: 128px;
-    left: 30px;
-    top: 2px;
+
+    left: 25px;
+    top: 0;
+
+    width: 140px;
+    height: 140px;
 }
 
-/* layered curved rose petals */
 
-.rose .petal {
+/* lots of overlapping petals */
+
+.rose-petal {
     position: absolute;
 
-    background: linear-gradient(
-        135deg,
-        #ff3d78,
-        #c7144d
-    );
+    border-radius: 55% 45% 60% 40%;
 
-    border-radius: 58% 42% 60% 40%;
+    background:
+        linear-gradient(
+            145deg,
+            #ff5b8d,
+            #d51b55 75%
+        );
 
     box-shadow:
-        inset -4px -4px 7px rgba(100,0,35,.15),
-        1px 2px 4px rgba(0,0,0,.14);
+        inset -4px -5px 8px rgba(106,0,35,.18),
+        2px 3px 5px rgba(0,0,0,.14);
 }
 
-.rose .p1 {
-    width: 66px;
-    height: 82px;
-    left: 31px;
-    top: 12px;
-    transform: rotate(7deg);
-}
-
-.rose .p2 {
+.r1 {
     width: 73px;
-    height: 55px;
-    left: 8px;
-    top: 40px;
-    transform: rotate(-42deg);
+    height: 82px;
+
+    left: 35px;
+    top: 10px;
+
+    transform: rotate(5deg);
 }
 
-.rose .p3 {
+.r2 {
     width: 75px;
-    height: 58px;
-    right: 5px;
-    top: 38px;
-    transform: rotate(39deg);
+    height: 62px;
+
+    left: 7px;
+    top: 40px;
+
+    transform: rotate(-38deg);
 }
 
-.rose .p4 {
-    width: 62px;
-    height: 68px;
-    left: 31px;
-    bottom: 1px;
+.r3 {
+    width: 76px;
+    height: 63px;
+
+    right: 5px;
+    top: 39px;
+
+    transform: rotate(38deg);
+}
+
+.r4 {
+    width: 65px;
+    height: 70px;
+
+    left: 35px;
+    bottom: 2px;
+
     transform: rotate(180deg);
 }
 
-.rose .p5 {
-    width: 46px;
-    height: 50px;
-    left: 42px;
-    top: 42px;
-    background: linear-gradient(
-        135deg,
-        #ff5689,
-        #b70d43
-    );
-    transform: rotate(-15deg);
-}
+.r5 {
+    width: 54px;
+    height: 62px;
 
-.rose .center {
-    position: absolute;
-    width: 29px;
-    height: 29px;
-    left: 50px;
-    top: 51px;
+    left: 44px;
+    top: 38px;
 
-    border-radius: 50%;
+    transform: rotate(-13deg);
 
     background:
-        radial-gradient(
-            circle,
-            #ff8cae 0 20%,
-            #d71854 21% 48%,
-            #8f0c39 49%
+        linear-gradient(
+            145deg,
+            #ff739d,
+            #bd124b
         );
+}
 
-    z-index: 5;
+.r6 {
+    width: 42px;
+    height: 48px;
+
+    left: 49px;
+    top: 52px;
+
+    transform: rotate(30deg);
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff8caf,
+            #b90e45
+        );
 }
 
 
 /* =========================================================
-   PERENNIAL ASTER
+   ASTER
 ========================================================= */
 
 .aster {
-    left: 77%;
-    top: 20%;
+    left: 75%;
+    top: 25%;
 }
 
 .aster .flower-head {
     position: absolute;
-    left: 36px;
-    top: 8px;
-    width: 120px;
-    height: 120px;
+
+    left: 33px;
+    top: 4px;
+
+    width: 125px;
+    height: 125px;
 }
 
-.aster .petal {
+
+/* narrow petals */
+
+.aster-petal {
     position: absolute;
-    width: 19px;
-    height: 57px;
 
-    left: 51px;
-    top: 5px;
+    left: 53px;
+    top: 3px;
 
-    background: linear-gradient(
-        90deg,
-        #7652b8,
-        #aa82dc,
-        #6846a7
-    );
+    width: 17px;
+    height: 62px;
 
-    border-radius: 55% 55% 45% 45%;
+    border-radius: 70% 70% 45% 45%;
 
-    transform-origin: 9px 55px;
+    background:
+        linear-gradient(
+            90deg,
+            #6844a3,
+            #a277d1,
+            #6844a3
+        );
 
-    box-shadow: 1px 2px 3px rgba(0,0,0,.13);
+    transform-origin: 8px 59px;
+
+    box-shadow:
+        1px 2px 3px rgba(0,0,0,.14);
 }
 
-.aster .petal:nth-child(1) { transform: rotate(0deg); }
-.aster .petal:nth-child(2) { transform: rotate(30deg); }
-.aster .petal:nth-child(3) { transform: rotate(60deg); }
-.aster .petal:nth-child(4) { transform: rotate(90deg); }
-.aster .petal:nth-child(5) { transform: rotate(120deg); }
-.aster .petal:nth-child(6) { transform: rotate(150deg); }
-.aster .petal:nth-child(7) { transform: rotate(180deg); }
-.aster .petal:nth-child(8) { transform: rotate(210deg); }
-.aster .petal:nth-child(9) { transform: rotate(240deg); }
-.aster .petal:nth-child(10) { transform: rotate(270deg); }
-.aster .petal:nth-child(11) { transform: rotate(300deg); }
-.aster .petal:nth-child(12) { transform: rotate(330deg); }
 
-.aster .center {
+/* 16 petals */
+
+.a1 { transform: rotate(0deg); }
+.a2 { transform: rotate(22.5deg); }
+.a3 { transform: rotate(45deg); }
+.a4 { transform: rotate(67.5deg); }
+.a5 { transform: rotate(90deg); }
+.a6 { transform: rotate(112.5deg); }
+.a7 { transform: rotate(135deg); }
+.a8 { transform: rotate(157.5deg); }
+.a9 { transform: rotate(180deg); }
+.a10 { transform: rotate(202.5deg); }
+.a11 { transform: rotate(225deg); }
+.a12 { transform: rotate(247.5deg); }
+.a13 { transform: rotate(270deg); }
+.a14 { transform: rotate(292.5deg); }
+.a15 { transform: rotate(315deg); }
+.a16 { transform: rotate(337.5deg); }
+
+
+.aster-center {
     position: absolute;
 
-    width: 39px;
-    height: 39px;
+    left: 41px;
+    top: 41px;
 
-    left: 42px;
-    top: 42px;
+    width: 43px;
+    height: 43px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            #e8bd48 0 35%,
-            #b98624 36% 65%,
-            #79591b 66%
+            #f2d36a 0 30%,
+            #c39532 31% 65%,
+            #82601e 66%
         );
 
-    z-index: 5;
+    z-index: 10;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.2);
 }
 
 
 /* =========================================================
-   FLOWER NAMES
-========================================================= */
-
-.flower-name {
-    position: absolute;
-
-    width: 190px;
-
-    left: 0;
-    top: 166px;
-
-    text-align: center;
-
-    font-size: 15px;
-    letter-spacing: .3px;
-
-    color: rgba(255,255,255,.94);
-
-    text-shadow:
-        0 2px 5px rgba(0,0,0,.45);
-}
-
-
-/* =========================================================
-   LOCKED / UNLOCKED
+   LOCK
 ========================================================= */
 
 .lock {
     position: absolute;
 
     left: 84px;
-    top: 142px;
+    top: 150px;
 
-    width: 22px;
-    height: 22px;
-
-    border-radius: 50%;
-
-    background: rgba(30,30,25,.65);
+    width: 23px;
+    height: 23px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-size: 11px;
+    border-radius: 50%;
 
-    opacity: .85;
+    background: rgba(30,35,25,.68);
+
+    font-size: 12px;
+
+    z-index: 20;
 }
 
 .flower.unlocked .lock {
-    background: rgba(236,202,93,.95);
-    color: #4a3b18;
+    background: #e5c96d;
+    color: #4d3d18;
 }
 
 
@@ -588,28 +799,26 @@ body {
     height: 70px;
 
     right: 48px;
-    top: 170px;
+    top: 40px;
 
     background:
         linear-gradient(
             145deg,
-            #454545,
-            #1d1d1d
+            #484848,
+            #191919
         );
 
     border-radius: 10px;
 
     box-shadow:
-        0 9px 20px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.15);
+        0 12px 25px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.16);
 
     cursor: grab;
 
-    z-index: 50;
-
     touch-action: none;
 
-    transition: transform .15s ease;
+    z-index: 500;
 }
 
 .camera:active {
@@ -621,7 +830,7 @@ body {
 
     position: absolute;
 
-    width: 34px;
+    width: 35px;
     height: 10px;
 
     left: 15px;
@@ -640,71 +849,70 @@ body {
     width: 9px;
     height: 9px;
 
-    right: 12px;
-    top: 11px;
+    right: 11px;
+    top: 10px;
 
     border-radius: 50%;
 
-    background: #b84a4a;
+    background: #bd4949;
 
     box-shadow:
-        0 0 5px rgba(255,80,80,.6);
+        0 0 7px rgba(255,70,70,.6);
 }
 
 .lens {
     position: absolute;
 
-    width: 46px;
-    height: 46px;
+    width: 47px;
+    height: 47px;
 
-    left: 31px;
-    top: 13px;
+    left: 30px;
+    top: 12px;
 
     border-radius: 50%;
 
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #687b82 0 8%,
-            #19282c 9% 35%,
-            #050708 36% 100%
-        );
-
     border: 5px solid #777;
 
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            #758d94 0 8%,
+            #26393e 9% 30%,
+            #0b1011 31% 100%
+        );
+
     box-shadow:
-        inset 0 0 8px rgba(255,255,255,.1),
-        0 2px 5px rgba(0,0,0,.35);
+        inset 0 0 9px rgba(255,255,255,.12);
 }
 
 .camera-label {
     position: absolute;
 
-    width: 150px;
-
-    left: -21px;
     top: 78px;
+    left: -22px;
+
+    width: 150px;
 
     text-align: center;
 
-    color: white;
-
     font-size: 12px;
 
+    color: white;
+
     text-shadow:
-        0 2px 5px rgba(0,0,0,.5);
+        0 2px 6px rgba(0,0,0,.6);
 }
 
 
 /* =========================================================
-   CAMERA TARGET
+   TARGET HIGHLIGHT
 ========================================================= */
 
-.flower.photo-target {
+.photo-target {
     filter:
         brightness(1.12)
         saturate(1.15)
-        drop-shadow(0 0 9px rgba(255,255,255,.45));
+        drop-shadow(0 0 12px rgba(255,255,255,.4));
 }
 
 
@@ -723,18 +931,32 @@ body {
 
     pointer-events: none;
 
-    z-index: 999;
-
-    transition: opacity .08s ease;
+    z-index: 9999;
 }
 
 .flash.active {
-    opacity: .92;
+    animation: cameraFlash .18s ease-out;
+}
+
+@keyframes cameraFlash {
+
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: .95;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
 }
 
 
 /* =========================================================
-   LETTER MODAL
+   LETTER
 ========================================================= */
 
 .letter-overlay {
@@ -743,29 +965,34 @@ body {
     inset: 0;
 
     display: flex;
-    align-items: center;
+
     justify-content: center;
+    align-items: center;
 
-    background: rgba(25,35,22,.52);
+    background: rgba(25,35,20,.55);
 
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(6px);
 
     opacity: 0;
+
     pointer-events: none;
 
     transition: opacity .3s ease;
 
-    z-index: 800;
+    z-index: 9000;
 }
 
 .letter-overlay.show {
     opacity: 1;
+
     pointer-events: auto;
 }
 
 .letter {
-    width: min(620px, 86vw);
-    max-height: 78vh;
+    width: min(620px, 88vw);
+
+    max-height: 80vh;
+
     overflow-y: auto;
 
     padding: 48px 52px;
@@ -773,57 +1000,48 @@ body {
     background:
         linear-gradient(
             145deg,
-            #f8f1df,
-            #eee3c8
+            #faf3df,
+            #ebe0c5
         );
 
-    color: #443e32;
+    color: #433c30;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.38);
-
-    transform: translateY(18px) scale(.98);
-
-    transition: transform .3s ease;
-}
-
-.letter-overlay.show .letter {
-    transform: translateY(0) scale(1);
+        0 25px 70px rgba(0,0,0,.4);
 }
 
 .letter h2 {
     margin: 0 0 22px;
 
-    font-size: 30px;
-
     font-weight: normal;
+
+    font-size: 31px;
 }
 
 .letter p {
-    font-size: 17px;
-    line-height: 1.8;
-
     white-space: pre-line;
+
+    font-size: 17px;
+
+    line-height: 1.85;
 }
 
 .close-letter {
-    margin-top: 24px;
-
     border: none;
 
-    background: #536c3d;
-
-    color: white;
-
-    padding: 10px 18px;
+    padding: 10px 19px;
 
     border-radius: 6px;
 
-    cursor: pointer;
+    background: #526d3d;
+
+    color: white;
 
     font-family: Georgia, serif;
+
+    cursor: pointer;
 }
 
 
@@ -831,19 +1049,20 @@ body {
    MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media(max-width:700px) {
 
     .introduction {
-        top: 22px;
-        right: 22px;
-        width: 280px;
+        left: 25px;
+        top: 25px;
+        width: 300px;
     }
 
     .introduction h1 {
-        font-size: 43px;
+        font-size: 45px;
     }
 
     .introduction p {
+        width: 280px;
         font-size: 13px;
     }
 
@@ -851,12 +1070,11 @@ body {
         left: 18px;
         bottom: 18px;
         width: 270px;
-        padding: 15px 18px;
     }
 
     .camera {
-        right: 25px;
-        top: 145px;
+        right: 20px;
+        top: 30px;
     }
 
     .flower {
@@ -868,39 +1086,39 @@ body {
     }
 
     .lantana {
-        left: 3%;
-        top: 40%;
+        left: 0;
+        top: 45%;
     }
 
     .chincherinchee {
-        left: 33%;
-        top: 27%;
+        left: 28%;
+        top: 28%;
     }
 
     .rose {
-        left: 48%;
-        top: 52%;
+        left: 45%;
+        top: 53%;
     }
 
     .aster {
         left: 67%;
-        top: 31%;
-    }
-
-    .letter {
-        padding: 35px 28px;
+        top: 29%;
     }
 }
+
 </style>
 </head>
-
 
 <body>
 
 <div class="garden">
 
+    <!-- GRASS BLADES -->
+    <div class="grass" id="grass"></div>
+
+
     <!-- =====================================================
-         INTRODUCTION
+         INTRO
     ====================================================== -->
 
     <div class="introduction">
@@ -909,7 +1127,8 @@ body {
 
         <p>
             i know I dont always have the right thing to say to you sometimes,
-            so I thought id make this for you
+            so I thought id make this for you<br>
+            i love you a lot
         </p>
 
     </div>
@@ -940,16 +1159,35 @@ body {
          data-letter="lantana">
 
         <div class="stem"></div>
+
         <div class="leaf one"></div>
         <div class="leaf two"></div>
 
         <div class="flower-head">
 
-            <div class="mini m1"></div>
-            <div class="mini m2"></div>
-            <div class="mini m3"></div>
-            <div class="mini m4"></div>
-            <div class="mini m5"></div>
+            <div class="lantana-flower lf1">
+                <span></span><span></span><span></span><span></span><i></i>
+            </div>
+
+            <div class="lantana-flower lf2">
+                <span></span><span></span><span></span><span></span><i></i>
+            </div>
+
+            <div class="lantana-flower lf3">
+                <span></span><span></span><span></span><span></span><i></i>
+            </div>
+
+            <div class="lantana-flower lf4">
+                <span></span><span></span><span></span><span></span><i></i>
+            </div>
+
+            <div class="lantana-flower lf5">
+                <span></span><span></span><span></span><span></span><i></i>
+            </div>
+
+            <div class="lantana-flower lf6">
+                <span></span><span></span><span></span><span></span><i></i>
+            </div>
 
         </div>
 
@@ -971,33 +1209,30 @@ body {
          data-letter="chincherinchee">
 
         <div class="stem"></div>
+
         <div class="leaf one"></div>
         <div class="leaf two"></div>
 
         <div class="flower-head">
 
-            <div class="small-flower f1">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <i></i>
+            <div class="small-white c1">
+                <span></span><span></span><span></span><span></span><i></i>
             </div>
 
-            <div class="small-flower f2">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <i></i>
+            <div class="small-white c2">
+                <span></span><span></span><span></span><span></span><i></i>
             </div>
 
-            <div class="small-flower f3">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <i></i>
+            <div class="small-white c3">
+                <span></span><span></span><span></span><span></span><i></i>
+            </div>
+
+            <div class="small-white c4">
+                <span></span><span></span><span></span><span></span><i></i>
+            </div>
+
+            <div class="small-white c5">
+                <span></span><span></span><span></span><span></span><i></i>
             </div>
 
         </div>
@@ -1020,18 +1255,18 @@ body {
          data-letter="rose">
 
         <div class="stem"></div>
+
         <div class="leaf one"></div>
         <div class="leaf two"></div>
 
         <div class="flower-head">
 
-            <div class="petal p1"></div>
-            <div class="petal p2"></div>
-            <div class="petal p3"></div>
-            <div class="petal p4"></div>
-            <div class="petal p5"></div>
-
-            <div class="center"></div>
+            <div class="rose-petal r1"></div>
+            <div class="rose-petal r2"></div>
+            <div class="rose-petal r3"></div>
+            <div class="rose-petal r4"></div>
+            <div class="rose-petal r5"></div>
+            <div class="rose-petal r6"></div>
 
         </div>
 
@@ -1053,25 +1288,30 @@ body {
          data-letter="aster">
 
         <div class="stem"></div>
+
         <div class="leaf one"></div>
         <div class="leaf two"></div>
 
         <div class="flower-head">
 
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
-            <div class="petal"></div>
+            <div class="aster-petal a1"></div>
+            <div class="aster-petal a2"></div>
+            <div class="aster-petal a3"></div>
+            <div class="aster-petal a4"></div>
+            <div class="aster-petal a5"></div>
+            <div class="aster-petal a6"></div>
+            <div class="aster-petal a7"></div>
+            <div class="aster-petal a8"></div>
+            <div class="aster-petal a9"></div>
+            <div class="aster-petal a10"></div>
+            <div class="aster-petal a11"></div>
+            <div class="aster-petal a12"></div>
+            <div class="aster-petal a13"></div>
+            <div class="aster-petal a14"></div>
+            <div class="aster-petal a15"></div>
+            <div class="aster-petal a16"></div>
 
-            <div class="center"></div>
+            <div class="aster-center"></div>
 
         </div>
 
@@ -1099,13 +1339,13 @@ body {
     </div>
 
 
-    <!-- CAMERA FLASH -->
+    <!-- FLASH -->
 
     <div class="flash" id="flash"></div>
 
 
     <!-- =====================================================
-         LETTER WINDOW
+         LETTER
     ====================================================== -->
 
     <div class="letter-overlay" id="letterOverlay">
@@ -1130,14 +1370,40 @@ body {
 <script>
 
 /* =========================================================
+   GRASS GENERATOR
+========================================================= */
+
+const grass = document.getElementById("grass");
+
+for (let i = 0; i < 250; i++) {
+
+    const blade = document.createElement("div");
+
+    blade.className = "blade";
+
+    blade.style.left =
+        Math.random() * 100 + "%";
+
+    blade.style.top =
+        Math.random() * 100 + "%";
+
+    blade.style.height =
+        (10 + Math.random() * 16) + "px";
+
+    blade.style.transform =
+        "rotate(" +
+        (-25 + Math.random() * 50) +
+        "deg)";
+
+    blade.style.opacity =
+        .25 + Math.random() * .45;
+
+    grass.appendChild(blade);
+}
+
+
+/* =========================================================
    YOUR LETTERS
-   =========================================================
-
-   THIS IS THE PART YOU WILL EDIT.
-
-   Replace the text between the backticks with whatever
-   you want each letter to say.
-
 ========================================================= */
 
 const letters = {
@@ -1145,8 +1411,7 @@ const letters = {
     lantana: `
 PUT YOUR LANTANA LETTER HERE.
 
-You can write as much as you want.
-Line breaks will stay exactly how you write them.
+Write whatever you want here.
 `,
 
     chincherinchee: `
@@ -1165,87 +1430,98 @@ PUT YOUR PERENNIAL ASTER LETTER HERE.
 
 
 /* =========================================================
-   CAMERA DRAGGING
+   CAMERA
 ========================================================= */
 
-const camera = document.getElementById("camera");
-const flash = document.getElementById("flash");
+const camera =
+    document.getElementById("camera");
+
+const flash =
+    document.getElementById("flash");
 
 let dragging = false;
+
 let offsetX = 0;
 let offsetY = 0;
 
+let currentTarget = null;
+
 
 /* =========================================================
-   FIND WHICH FLOWER THE CAMERA IS OVER
+   FIND FLOWER UNDER CAMERA
 ========================================================= */
-
-let currentTarget = null;
 
 function checkCameraTarget() {
 
-    const cameraRect = camera.getBoundingClientRect();
+    const cameraRect =
+        camera.getBoundingClientRect();
 
-    const cameraCenterX =
-        cameraRect.left + cameraRect.width / 2;
+    const cameraX =
+        cameraRect.left +
+        cameraRect.width / 2;
 
-    const cameraCenterY =
-        cameraRect.top + cameraRect.height / 2;
+    const cameraY =
+        cameraRect.top +
+        cameraRect.height / 2;
 
-
-    let closestFlower = null;
+    let closest = null;
     let closestDistance = Infinity;
 
 
-    document.querySelectorAll(".flower").forEach(flower => {
+    document
+        .querySelectorAll(".flower")
+        .forEach(flower => {
 
-        const rect = flower.getBoundingClientRect();
+            const rect =
+                flower.getBoundingClientRect();
 
-        const flowerCenterX =
-            rect.left + rect.width / 2;
+            const flowerX =
+                rect.left +
+                rect.width / 2;
 
-        const flowerCenterY =
-            rect.top + rect.height / 2;
+            const flowerY =
+                rect.top +
+                rect.height / 2;
+
+            const distance =
+                Math.sqrt(
+                    Math.pow(cameraX - flowerX, 2) +
+                    Math.pow(cameraY - flowerY, 2)
+                );
 
 
-        const distance = Math.sqrt(
-            Math.pow(cameraCenterX - flowerCenterX, 2) +
-            Math.pow(cameraCenterY - flowerCenterY, 2)
+            if (
+                distance < 100 &&
+                distance < closestDistance
+            ) {
+
+                closestDistance = distance;
+                closest = flower;
+
+            }
+
+        });
+
+
+    document
+        .querySelectorAll(".flower")
+        .forEach(flower => {
+
+            flower.classList.remove(
+                "photo-target"
+            );
+
+        });
+
+
+    currentTarget = closest;
+
+
+    if (closest) {
+
+        closest.classList.add(
+            "photo-target"
         );
-
-
-        /*
-          The camera only recognizes a flower when
-          it is reasonably close to the center.
-        */
-
-        if (
-            distance < 105 &&
-            distance < closestDistance
-        ) {
-
-            closestDistance = distance;
-            closestFlower = flower;
-
-        }
-
-    });
-
-
-    document.querySelectorAll(".flower").forEach(flower => {
-        flower.classList.remove("photo-target");
-    });
-
-
-    if (closestFlower) {
-
-        closestFlower.classList.add("photo-target");
-
-        currentTarget = closestFlower;
-
-    } else {
-
-        currentTarget = null;
 
     }
 
@@ -1258,131 +1534,165 @@ function checkCameraTarget() {
 
 function takePhoto(flower) {
 
-    if (!flower || flower.classList.contains("unlocked")) {
+    if (!flower) return;
+
+    if (
+        flower.classList.contains(
+            "unlocked"
+        )
+    ) {
         return;
     }
 
 
-    /* flash */
+    /* FLASH */
+
+    flash.classList.remove("active");
+
+    void flash.offsetWidth;
 
     flash.classList.add("active");
 
 
+    /* UNLOCK */
+
+    flower.classList.remove(
+        "locked"
+    );
+
+    flower.classList.add(
+        "unlocked"
+    );
+
+    flower
+        .querySelector(".lock")
+        .textContent = "✓";
+
+
+    /* CAMERA CLICK */
+
+    camera.style.transform =
+        "scale(.94)";
+
     setTimeout(() => {
 
-        flash.classList.remove("active");
+        camera.style.transform =
+            "scale(1)";
 
-    }, 120);
-
-
-    /* unlock */
-
-    flower.classList.remove("locked");
-    flower.classList.add("unlocked");
-
-
-    flower.querySelector(".lock").textContent = "✓";
-
-
-    /* little camera movement */
-
-    camera.style.transform = "scale(.94)";
-
-    setTimeout(() => {
-
-        camera.style.transform = "scale(1)";
-
-    }, 120);
+    }, 130);
 
 }
 
 
 /* =========================================================
-   CAMERA DRAG
+   DRAGGING
 ========================================================= */
 
-camera.addEventListener("pointerdown", event => {
+camera.addEventListener(
+    "pointerdown",
+    event => {
 
-    dragging = true;
+        dragging = true;
 
-    const rect = camera.getBoundingClientRect();
+        const rect =
+            camera.getBoundingClientRect();
 
-    offsetX = event.clientX - rect.left;
-    offsetY = event.clientY - rect.top;
+        offsetX =
+            event.clientX -
+            rect.left;
 
-    camera.setPointerCapture(event.pointerId);
+        offsetY =
+            event.clientY -
+            rect.top;
 
-});
-
-
-camera.addEventListener("pointermove", event => {
-
-    if (!dragging) {
-        return;
-    }
-
-
-    let x =
-        event.clientX - offsetX;
-
-    let y =
-        event.clientY - offsetY;
-
-
-    x = Math.max(
-        0,
-        Math.min(
-            window.innerWidth - camera.offsetWidth,
-            x
-        )
-    );
-
-
-    y = Math.max(
-        0,
-        Math.min(
-            window.innerHeight - camera.offsetHeight,
-            y
-        )
-    );
-
-
-    camera.style.left = x + "px";
-    camera.style.top = y + "px";
-    camera.style.right = "auto";
-
-
-    checkCameraTarget();
-
-});
-
-
-camera.addEventListener("pointerup", event => {
-
-    dragging = false;
-
-    checkCameraTarget();
-
-
-    /*
-      If the camera is over a flower when released,
-      take the picture.
-    */
-
-    if (currentTarget) {
-
-        takePhoto(currentTarget);
+        camera.setPointerCapture(
+            event.pointerId
+        );
 
     }
+);
 
-});
+
+camera.addEventListener(
+    "pointermove",
+    event => {
+
+        if (!dragging) return;
 
 
-camera.addEventListener("pointercancel", () => {
+        let x =
+            event.clientX -
+            offsetX;
 
-    dragging = false;
+        let y =
+            event.clientY -
+            offsetY;
 
-});
+
+        x = Math.max(
+            0,
+            Math.min(
+                window.innerWidth -
+                camera.offsetWidth,
+                x
+            )
+        );
+
+
+        y = Math.max(
+            0,
+            Math.min(
+                window.innerHeight -
+                camera.offsetHeight,
+                y
+            )
+        );
+
+
+        camera.style.left =
+            x + "px";
+
+        camera.style.top =
+            y + "px";
+
+        camera.style.right =
+            "auto";
+
+
+        checkCameraTarget();
+
+    }
+);
+
+
+camera.addEventListener(
+    "pointerup",
+    () => {
+
+        dragging = false;
+
+        checkCameraTarget();
+
+        if (currentTarget) {
+
+            takePhoto(
+                currentTarget
+            );
+
+        }
+
+    }
+);
+
+
+camera.addEventListener(
+    "pointercancel",
+    () => {
+
+        dragging = false;
+
+    }
+);
 
 
 /* =========================================================
@@ -1390,75 +1700,94 @@ camera.addEventListener("pointercancel", () => {
 ========================================================= */
 
 const letterOverlay =
-    document.getElementById("letterOverlay");
+    document.getElementById(
+        "letterOverlay"
+    );
 
 const letterTitle =
-    document.getElementById("letterTitle");
+    document.getElementById(
+        "letterTitle"
+    );
 
 const letterText =
-    document.getElementById("letterText");
+    document.getElementById(
+        "letterText"
+    );
 
 const closeLetter =
-    document.getElementById("closeLetter");
+    document.getElementById(
+        "closeLetter"
+    );
 
 
-document.querySelectorAll(".flower").forEach(flower => {
+document
+    .querySelectorAll(".flower")
+    .forEach(flower => {
 
-    flower.addEventListener("click", () => {
+        flower.addEventListener(
+            "click",
+            () => {
 
-        /*
-          Locked flowers cannot be opened.
-        */
-
-        if (flower.classList.contains("locked")) {
-
-            return;
-
-        }
-
-
-        const letterID =
-            flower.dataset.letter;
+                if (
+                    flower.classList.contains(
+                        "locked"
+                    )
+                ) {
+                    return;
+                }
 
 
-        letterTitle.textContent =
-            flower.dataset.name;
+                const letterID =
+                    flower.dataset.letter;
 
 
-        letterText.textContent =
-            letters[letterID];
+                letterTitle.textContent =
+                    flower.dataset.name;
 
 
-        letterOverlay.classList.add("show");
+                letterText.textContent =
+                    letters[letterID];
+
+
+                letterOverlay.classList.add(
+                    "show"
+                );
+
+            }
+        );
 
     });
 
-});
 
+closeLetter.addEventListener(
+    "click",
+    () => {
 
-closeLetter.addEventListener("click", () => {
-
-    letterOverlay.classList.remove("show");
-
-});
-
-
-letterOverlay.addEventListener("click", event => {
-
-    if (event.target === letterOverlay) {
-
-        letterOverlay.classList.remove("show");
+        letterOverlay.classList.remove(
+            "show"
+        );
 
     }
+);
 
-});
 
+letterOverlay.addEventListener(
+    "click",
+    event => {
 
-/* =========================================================
-   INITIAL CHECK
-========================================================= */
+        if (
+            event.target ===
+            letterOverlay
+        ) {
 
-checkCameraTarget();
+            letterOverlay.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
 
 </script>
 
