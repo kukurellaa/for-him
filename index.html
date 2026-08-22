@@ -3,11 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>For Tharuk</title>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap');
+/* =========================================================
+   FONTS
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap');
+
+
+/* =========================================================
+   BASIC
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -26,14 +36,16 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    GARDEN
-===================================================== */
+========================================================= */
 
 .garden {
     position: relative;
+
     width: 100vw;
     height: 100vh;
+
     overflow: hidden;
 
     background:
@@ -52,6 +64,7 @@ body {
 
 .garden::before {
     content: "";
+
     position: absolute;
     inset: 0;
 
@@ -77,12 +90,13 @@ body {
 
 .garden::after {
     content: "";
+
     position: absolute;
     inset: 0;
 
     pointer-events: none;
 
-    opacity: .12;
+    opacity: .10;
 
     background-image:
         radial-gradient(
@@ -96,9 +110,9 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    INTRODUCTION
-===================================================== */
+========================================================= */
 
 .introduction {
     position: absolute;
@@ -148,7 +162,7 @@ body {
 
     font-size: 21px;
 
-    line-height: 1.35;
+    line-height: 1.4;
 
     color: rgba(255,255,255,.94);
 
@@ -157,14 +171,14 @@ body {
 }
 
 
-/* =====================================================
-   HOW THIS WORKS
-===================================================== */
+/* =========================================================
+   HOW THIS WORKS — BOTTOM LEFT
+========================================================= */
 
 .instructions {
     position: absolute;
 
-    left: 350px;
+    left: 30px;
     bottom: 30px;
 
     width: 310px;
@@ -200,7 +214,7 @@ body {
         Georgia,
         serif;
 
-    font-size: 24px;
+    font-size: 25px;
 
     font-weight: 600;
 }
@@ -214,23 +228,22 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    FLOWERS
-===================================================== */
+========================================================= */
 
 .flower {
     position: absolute;
 
     width: 220px;
-    height: 270px;
+    height: 280px;
 
     cursor: pointer;
 
     z-index: 10;
 
     transition:
-        transform .4s cubic-bezier(.2,.8,.2,1),
-        filter .3s ease;
+        transform .4s cubic-bezier(.2,.8,.2,1);
 }
 
 .flower:hover {
@@ -239,9 +252,6 @@ body {
         scale(1.025);
 }
 
-
-/* actual flower image */
-
 .flower-image {
     position: absolute;
 
@@ -249,6 +259,7 @@ body {
     height: 190px;
 
     object-fit: contain;
+
     object-position: center;
 
     filter:
@@ -273,11 +284,9 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    FLOWER POSITIONS
-===================================================== */
-
-/* Lantana moved farther right */
+========================================================= */
 
 .lantana {
     left: 21%;
@@ -300,9 +309,9 @@ body {
 }
 
 
-/* =====================================================
-   FLOWER NAMES
-===================================================== */
+/* =========================================================
+   FLOWER NAMES + MOOD
+========================================================= */
 
 .flower-name {
     position: absolute;
@@ -319,9 +328,9 @@ body {
         Georgia,
         serif;
 
-    font-size: 20px;
+    font-size: 21px;
 
-    font-weight: 500;
+    font-weight: 600;
 
     color: white;
 
@@ -331,10 +340,36 @@ body {
         0 2px 8px rgba(0,0,0,.65);
 }
 
+.flower-mood {
+    position: absolute;
 
-/* =====================================================
+    left: 0;
+    top: 222px;
+
+    width: 205px;
+
+    text-align: center;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 16px;
+
+    font-style: italic;
+
+    color:
+        rgba(255,255,255,.90);
+
+    text-shadow:
+        0 2px 7px rgba(0,0,0,.7);
+}
+
+
+/* =========================================================
    LOCK
-===================================================== */
+========================================================= */
 
 .lock {
     position: absolute;
@@ -363,6 +398,9 @@ body {
 
     box-shadow:
         0 4px 9px rgba(0,0,0,.2);
+
+    transition:
+        .3s ease;
 }
 
 .flower.unlocked .lock {
@@ -371,9 +409,9 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    CAMERA
-===================================================== */
+========================================================= */
 
 .camera {
     position: absolute;
@@ -382,7 +420,7 @@ body {
     right: 45px;
 
     width: 128px;
-    height: 108px;
+    height: 80px;
 
     cursor: grab;
 
@@ -399,9 +437,6 @@ body {
 .camera:active {
     cursor: grabbing;
 }
-
-
-/* camera body */
 
 .camera-body {
     position: absolute;
@@ -431,9 +466,6 @@ body {
         inset 0 -4px 8px rgba(0,0,0,.3);
 }
 
-
-/* top grip */
-
 .camera-top {
     position: absolute;
 
@@ -456,9 +488,6 @@ body {
         inset 0 1px rgba(255,255,255,.15);
 }
 
-
-/* shutter */
-
 .shutter {
     position: absolute;
 
@@ -475,9 +504,6 @@ body {
     box-shadow:
         0 2px 2px rgba(0,0,0,.4);
 }
-
-
-/* viewfinder */
 
 .viewfinder {
     position: absolute;
@@ -499,9 +525,6 @@ body {
     border:
         1px solid #686a65;
 }
-
-
-/* lens */
 
 .camera-lens {
     position: absolute;
@@ -532,9 +555,6 @@ body {
         0 4px 7px rgba(0,0,0,.35);
 }
 
-
-/* lens reflection */
-
 .camera-lens::after {
     content: "";
 
@@ -555,9 +575,6 @@ body {
         rotate(-30deg);
 }
 
-
-/* indicator */
-
 .camera-light {
     position: absolute;
 
@@ -576,41 +593,20 @@ body {
 }
 
 
-/* label */
-
-.camera-label {
-    position: absolute;
-
-    left: -20px;
-    top: 91px;
-
-    width: 170px;
-
-    text-align: center;
-
-    font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
-
-    font-size: 17px;
-
-    color: white;
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.65);
-}
+/* =========================================================
+   NO CAMERA LABEL
+========================================================= */
 
 
-/* =====================================================
+/* =========================================================
    CAMERA TARGET
-===================================================== */
+========================================================= */
 
 .photo-target .flower-image {
     filter:
         drop-shadow(
             0 0 13px
-            rgba(255,255,220,.7)
+            rgba(255,255,220,.75)
         );
 
     transform:
@@ -618,9 +614,9 @@ body {
 }
 
 
-/* =====================================================
+/* =========================================================
    FLASH
-===================================================== */
+========================================================= */
 
 .flash {
     position: fixed;
@@ -657,9 +653,9 @@ body {
 }
 
 
-/* =====================================================
-   LETTER
-===================================================== */
+/* =========================================================
+   LETTER OVERLAY
+========================================================= */
 
 .letter-overlay {
     position: fixed;
@@ -672,10 +668,10 @@ body {
     align-items: center;
 
     background:
-        rgba(23,33,20,.58);
+        rgba(23,33,20,.64);
 
     backdrop-filter:
-        blur(8px);
+        blur(9px);
 
     opacity: 0;
 
@@ -693,69 +689,314 @@ body {
     pointer-events: auto;
 }
 
-.letter {
+
+/* =========================================================
+   LETTER WRAPPER
+========================================================= */
+
+.letter-wrapper {
+
+    position: relative;
+
     width:
-        min(620px, 88vw);
+        min(700px, 90vw);
 
-    max-height: 80vh;
+    max-height: 86vh;
 
-    overflow-y: auto;
+    display: flex;
 
-    padding:
-        48px 52px;
-
-    border-radius: 12px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fbf5e4,
-            #ebe0c5
-        );
-
-    color: #433d31;
-
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.42);
-
-    animation:
-        letterOpen .4s ease;
+    justify-content: center;
 }
 
-@keyframes letterOpen {
 
-    from {
-        transform:
-            translateY(15px)
-            scale(.97);
+/* =========================================================
+   BOOKMARKS
+========================================================= */
 
-        opacity: 0;
-    }
+.bookmarks {
 
-    to {
-        transform:
-            translateY(0)
-            scale(1);
+    position: absolute;
 
-        opacity: 1;
-    }
+    right: -2px;
+    top: 70px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    z-index: -1;
 }
 
-.letter h2 {
-    margin: 0 0 20px;
+.bookmark {
+
+    position: relative;
+
+    width: 115px;
+    height: 48px;
+
+    padding-left: 18px;
+
+    display: flex;
+
+    align-items: center;
 
     font-family:
         "Cormorant Garamond",
         Georgia,
         serif;
 
-    font-size: 38px;
+    font-size: 17px;
 
-    font-weight: 500;
+    font-weight: 600;
+
+    color: #f9f4e7;
+
+    cursor: pointer;
+
+    border-radius:
+        0 7px 7px 0;
+
+    box-shadow:
+        3px 5px 8px
+        rgba(0,0,0,.2);
+
+    transition:
+        transform .25s ease,
+        right .25s ease;
+}
+
+.bookmark:hover {
+    transform:
+        translateX(7px);
+}
+
+.bookmark.active {
+    transform:
+        translateX(12px);
+}
+
+.bookmark::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: -10px;
+
+    width: 0;
+    height: 0;
+
+    border-top:
+        10px solid currentColor;
+
+    border-left:
+        12px solid transparent;
+
+    filter:
+        brightness(.75);
+}
+
+.bookmark-flower {
+    background: #789064;
+    color: #789064;
+}
+
+.bookmark-letter {
+    background: #9d6a72;
+    color: #9d6a72;
+}
+
+.bookmark-video {
+    background: #8c7952;
+    color: #8c7952;
+}
+
+
+/* =========================================================
+   LETTER PAPER
+========================================================= */
+
+.letter {
+
+    position: relative;
+
+    width:
+        min(620px, 88vw);
+
+    max-height: 82vh;
+
+    overflow-y: auto;
+
+    padding:
+        55px 65px 60px;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fbf5e4,
+            #eee3c8
+        );
+
+    color: #433d31;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.45),
+
+        inset 0 0 40px
+        rgba(121,91,49,.07);
+
+    animation:
+        letterOpen .4s ease;
+}
+
+
+/* =========================================================
+   BOTANICAL BORDER
+========================================================= */
+
+.botanical-border {
+    position: absolute;
+
+    inset: 15px;
+
+    border:
+        1px solid
+        rgba(91,112,75,.35);
+
+    pointer-events: none;
+}
+
+
+/* corner leaves */
+
+.botanical-border::before,
+.botanical-border::after {
+
+    content:
+        "❧";
+
+    position: absolute;
+
+    font-size: 48px;
+
+    color:
+        rgba(77,105,67,.72);
+
+    font-family:
+        Georgia,
+        serif;
+}
+
+.botanical-border::before {
+
+    top: -14px;
+    left: -5px;
+
+    transform:
+        rotate(-15deg);
+}
+
+.botanical-border::after {
+
+    bottom: -15px;
+    right: -4px;
+
+    transform:
+        rotate(165deg);
+}
+
+
+/* tiny white rose corners */
+
+.white-rose {
+
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 45% 35%,
+            #ffffff 0 12%,
+            #eee9dc 13% 25%,
+            #fffdf5 26% 39%,
+            #e8e3d8 40% 53%,
+            #fffdf6 54% 70%,
+            transparent 71%
+        );
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(60,70,45,.2)
+        );
+}
+
+.white-rose.one {
+    top: 17px;
+    right: 20px;
+}
+
+.white-rose.two {
+    bottom: 17px;
+    left: 20px;
+}
+
+
+/* =========================================================
+   LETTER CONTENT
+========================================================= */
+
+.letter-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+.letter h2 {
+
+    margin:
+        0 0 4px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 42px;
+
+    font-weight: 600;
+
+    color: #4b493c;
+}
+
+.letter-subtitle {
+
+    margin-bottom: 28px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 18px;
+
+    font-style: italic;
+
+    color: #758067;
 }
 
 .letter p {
+
     white-space: pre-line;
 
     font-family:
@@ -763,16 +1004,109 @@ body {
         Georgia,
         serif;
 
-    font-size: 20px;
+    font-size: 21px;
 
     line-height: 1.75;
 }
 
+
+/* =========================================================
+   FLOWER INFORMATION PANEL
+========================================================= */
+
+.flower-info {
+
+    display: none;
+}
+
+.flower-info.active {
+
+    display: block;
+
+    animation:
+        contentFade .3s ease;
+}
+
+
+/* =========================================================
+   MY LETTER PANEL
+========================================================= */
+
+.my-letter {
+
+    display: none;
+}
+
+.my-letter.active {
+
+    display: block;
+
+    animation:
+        contentFade .3s ease;
+}
+
+
+/* =========================================================
+   VIDEO PANEL
+========================================================= */
+
+.video-panel {
+
+    display: none;
+}
+
+.video-panel.active {
+
+    display: block;
+
+    animation:
+        contentFade .3s ease;
+}
+
+.video-panel video {
+
+    width: 100%;
+
+    max-height: 400px;
+
+    border-radius: 8px;
+
+    background: #20231f;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.22);
+}
+
+.video-note {
+
+    margin-top: 15px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 18px;
+
+    font-style: italic;
+
+    color: #706d5d;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
 .close-letter {
+
+    margin-top: 25px;
+
     border: none;
 
     padding:
-        10px 20px;
+        10px 22px;
 
     border-radius: 7px;
 
@@ -785,30 +1119,75 @@ body {
         sans-serif;
 
     cursor: pointer;
+
+    transition:
+        background .2s ease;
+}
+
+.close-letter:hover {
+    background: #405632;
 }
 
 
-/* =====================================================
-   ANIMATION
-===================================================== */
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes letterOpen {
+
+    from {
+
+        transform:
+            translateY(15px)
+            scale(.97);
+
+        opacity: 0;
+    }
+
+    to {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        opacity: 1;
+    }
+}
+
+@keyframes contentFade {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+}
 
 @keyframes fadeIn {
 
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform:
+            translateY(10px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 }
 
 
-/* =====================================================
+/* =========================================================
    MOBILE
-===================================================== */
+========================================================= */
 
 @media(max-width:700px) {
 
@@ -828,7 +1207,7 @@ body {
     }
 
     .instructions {
-        left: 22px;
+        left: 20px;
         bottom: 18px;
         width: 270px;
     }
@@ -859,10 +1238,34 @@ body {
         top: 28%;
     }
 
+    .letter {
+        padding:
+            45px 30px 45px;
+    }
+
+    .letter h2 {
+        font-size: 34px;
+    }
+
+    .letter p {
+        font-size: 18px;
+    }
+
+    .bookmarks {
+        right: -8px;
+    }
+
+    .bookmark {
+        width: 90px;
+        font-size: 14px;
+        padding-left: 10px;
+    }
+
 }
 
 </style>
 </head>
+
 
 <body>
 
@@ -870,7 +1273,7 @@ body {
 
 
 <!-- =====================================================
-     INTRO
+     INTRODUCTION
 ===================================================== -->
 
 <div class="introduction">
@@ -922,6 +1325,10 @@ body {
         Lantana
     </div>
 
+    <div class="flower-mood">
+        when university feels overwhelming
+    </div>
+
 </div>
 
 
@@ -943,6 +1350,10 @@ body {
 
     <div class="flower-name">
         Chincherinchee
+    </div>
+
+    <div class="flower-mood">
+        when you're doubting yourself
     </div>
 
 </div>
@@ -968,6 +1379,10 @@ body {
         Damask Rose
     </div>
 
+    <div class="flower-mood">
+        when you need a little reminder of us
+    </div>
+
 </div>
 
 
@@ -991,6 +1406,10 @@ body {
         Perennial Aster
     </div>
 
+    <div class="flower-mood">
+        when everything feels like too much
+    </div>
+
 </div>
 
 
@@ -998,7 +1417,9 @@ body {
      CAMERA
 ===================================================== -->
 
-<div class="camera" id="camera">
+<div
+    class="camera"
+    id="camera">
 
     <div class="camera-body"></div>
 
@@ -1012,14 +1433,12 @@ body {
 
     <div class="camera-light"></div>
 
-    <div class="camera-label">
-        drag me ♡
-    </div>
-
 </div>
 
 
-<!-- FLASH -->
+<!-- =====================================================
+     FLASH
+===================================================== -->
 
 <div
     class="flash"
@@ -1028,26 +1447,162 @@ body {
 
 
 <!-- =====================================================
-     LETTER
+     LETTER OVERLAY
 ===================================================== -->
 
 <div
     class="letter-overlay"
     id="letterOverlay">
 
-    <div class="letter">
 
-        <h2 id="letterTitle"></h2>
+    <div class="letter-wrapper">
 
-        <p id="letterText"></p>
 
-        <button
-            class="close-letter"
-            id="closeLetter">
+        <!-- BOOKMARKS -->
 
-            close
+        <div class="bookmarks">
 
-        </button>
+            <div
+                class="bookmark bookmark-flower"
+                data-tab="flower">
+
+                the flower
+
+            </div>
+
+            <div
+                class="bookmark bookmark-letter"
+                data-tab="letter">
+
+                my letter
+
+            </div>
+
+            <div
+                class="bookmark bookmark-video"
+                id="videoBookmark"
+                data-tab="video">
+
+                a little video
+
+            </div>
+
+        </div>
+
+
+        <!-- LETTER PAPER -->
+
+        <div class="letter">
+
+            <div class="botanical-border"></div>
+
+            <div class="white-rose one"></div>
+
+            <div class="white-rose two"></div>
+
+
+            <div class="letter-content">
+
+
+                <!-- =====================================
+                     FLOWER INFORMATION
+                ====================================== -->
+
+                <div
+                    class="flower-info active"
+                    id="flowerInfo">
+
+                    <h2 id="flowerInfoTitle">
+                        The Flower
+                    </h2>
+
+                    <div
+                        class="letter-subtitle"
+                        id="flowerInfoSubtitle">
+                    </div>
+
+                    <p id="flowerInfoText"></p>
+
+                </div>
+
+
+                <!-- =====================================
+                     MY LETTER
+                ====================================== -->
+
+                <div
+                    class="my-letter"
+                    id="myLetter">
+
+                    <h2 id="letterTitle">
+                        My Letter
+                    </h2>
+
+                    <div
+                        class="letter-subtitle">
+                        something I wanted you to have
+                    </div>
+
+                    <p id="letterText"></p>
+
+                </div>
+
+
+                <!-- =====================================
+                     VIDEO
+                ====================================== -->
+
+                <div
+                    class="video-panel"
+                    id="videoPanel">
+
+                    <h2>
+                        a little something for you
+                    </h2>
+
+                    <div
+                        class="letter-subtitle">
+                        watch this whenever you need it
+                    </div>
+
+                    <video
+                        id="roseVideo"
+                        controls
+                        playsinline>
+
+                        <source
+                            src="tharuk-video.mp4"
+                            type="video/mp4">
+
+                        Your browser does not support video.
+
+                    </video>
+
+                    <div class="video-note">
+
+                        I wanted you to have something
+                        you could come back to whenever
+                        you needed it.
+
+                    </div>
+
+                </div>
+
+
+                <!-- CLOSE -->
+
+                <button
+                    class="close-letter"
+                    id="closeLetter">
+
+                    close
+
+                </button>
+
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -1059,46 +1614,201 @@ body {
 
 <script>
 
-/* =====================================================
-   YOUR LETTERS
-=====================================================
+/* =========================================================
+   FLOWER INFORMATION
+========================================================= */
 
-   THIS IS WHERE WE WILL PUT YOUR REAL LETTERS.
+const flowerInformation = {
 
-*/
+    lantana: {
 
-const letters = {
+        title: "Lantana",
+
+        subtitle:
+            "a little flower for the days that feel heavy",
+
+        text: `
+Lantana is a flower that grows in little clusters, with many small flowers gathered together.
+
+I thought that was a lovely way to think about university too. Sometimes everything can feel like it is piling up at once — assignments, deadlines, expectations, things you haven't figured out yet.
+
+But you don't have to carry all of it at the same time.
+
+Take one thing.
+
+Then another.
+
+And if today all you manage to do is breathe and get through the day, that's okay too.
+
+You don't have to have everything figured out right now.
+`
+    },
+
+
+    chincherinchee: {
+
+        title: "Chincherinchee",
+
+        subtitle:
+            "for when you're being harder on yourself than you should be",
+
+        text: `
+Chincherinchee flowers grow together in little groups, and I think there's something really comforting about that.
+
+University can make you feel like you're supposed to know exactly what you're doing all the time.
+
+You're not.
+
+Not knowing something doesn't mean you're not capable.
+
+Having a difficult week doesn't mean you're falling behind in life.
+
+And struggling with something doesn't make you any less intelligent.
+
+I hope you remember that I see how hard you're trying, even on the days when you don't see it yourself.
+`
+    },
+
+
+    rose: {
+
+        title: "Damask Rose",
+
+        subtitle:
+            "for when you need a little reminder of us",
+
+        text: `
+I chose the Damask Rose for this one because I wanted there to be something here that wasn't about university at all.
+
+Just us.
+
+Something you can come back to when you miss me, when you've had a long day, or when you just want to feel a little closer to me.
+
+There is a video waiting behind the other little bookmark too.
+
+I hope you like it.
+`
+    },
+
+
+    aster: {
+
+        title: "Perennial Aster",
+
+        subtitle:
+            "for when everything feels like too much",
+
+        text: `
+If you found this one, I think you probably need a moment to stop.
+
+So stop.
+
+You don't need to be productive right now.
+
+You don't need to answer every message.
+
+You don't need to figure out tomorrow tonight.
+
+Take a breath.
+
+Drink some water.
+
+Put your phone down for a little while if you need to.
+
+The world can wait.
+
+And when you feel ready, you can come back to everything one little thing at a time.
+
+I'm proud of you.
+`
+    }
+
+};
+
+
+/* =========================================================
+   PERSONAL LETTERS
+=========================================================
+
+   THESE ARE PLACEHOLDERS FOR NOW.
+
+   We'll replace them with your actual words.
+========================================================= */
+
+const personalLetters = {
 
     lantana: `
-PUT YOUR LANTANA LETTER HERE.
+Write your personal Lantana letter here.
 
-You can write anything you want here.
+This can be the really personal message from you to him about university, stress, and how much you believe in him.
 `,
 
     chincherinchee: `
-PUT YOUR CHINCHERINCHEE LETTER HERE.
+Write your personal Chincherinchee letter here.
+
+This one could be more about when he doubts himself or feels like he isn't doing enough.
 `,
 
     rose: `
-PUT YOUR DAMASK ROSE LETTER HERE.
+Write your personal Damask Rose letter here.
+
+This one can be completely about the two of you.
+
+You can make this one more romantic if you want.
 `,
 
     aster: `
-PUT YOUR PERENNIAL ASTER LETTER HERE.
+Write your personal Perennial Aster letter here.
+
+This one could be your softest letter — something he can read when he feels completely overwhelmed.
 `
 
 };
 
 
-/* =====================================================
-   CAMERA
-===================================================== */
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
 const camera =
     document.getElementById("camera");
 
 const flash =
     document.getElementById("flash");
+
+const letterOverlay =
+    document.getElementById("letterOverlay");
+
+const flowerInfo =
+    document.getElementById("flowerInfo");
+
+const myLetter =
+    document.getElementById("myLetter");
+
+const videoPanel =
+    document.getElementById("videoPanel");
+
+const videoBookmark =
+    document.getElementById("videoBookmark");
+
+const flowerInfoTitle =
+    document.getElementById("flowerInfoTitle");
+
+const flowerInfoSubtitle =
+    document.getElementById("flowerInfoSubtitle");
+
+const flowerInfoText =
+    document.getElementById("flowerInfoText");
+
+const letterTitle =
+    document.getElementById("letterTitle");
+
+const letterText =
+    document.getElementById("letterText");
+
+const closeLetter =
+    document.getElementById("closeLetter");
+
 
 let dragging = false;
 
@@ -1107,10 +1817,12 @@ let offsetY = 0;
 
 let currentTarget = null;
 
+let currentFlower = null;
 
-/* =====================================================
-   FIND FLOWER UNDER CAMERA
-===================================================== */
+
+/* =========================================================
+   CAMERA TARGET DETECTION
+========================================================= */
 
 function checkCameraTarget() {
 
@@ -1203,9 +1915,9 @@ function checkCameraTarget() {
 }
 
 
-/* =====================================================
+/* =========================================================
    TAKE PHOTO
-===================================================== */
+========================================================= */
 
 function takePhoto(flower) {
 
@@ -1217,11 +1929,13 @@ function takePhoto(flower) {
             "unlocked"
         )
     ) {
+
         return;
+
     }
 
 
-    /* camera flash */
+    /* flash */
 
     flash.classList.remove(
         "active"
@@ -1234,7 +1948,7 @@ function takePhoto(flower) {
     );
 
 
-    /* unlock flower */
+    /* unlock */
 
     flower.classList.remove(
         "locked"
@@ -1250,7 +1964,7 @@ function takePhoto(flower) {
     ).textContent = "✓";
 
 
-    /* tiny camera movement */
+    /* camera click */
 
     camera.style.transform =
         "scale(.93)";
@@ -1265,9 +1979,9 @@ function takePhoto(flower) {
 }
 
 
-/* =====================================================
+/* =========================================================
    CAMERA DRAG
-===================================================== */
+========================================================= */
 
 camera.addEventListener(
     "pointerdown",
@@ -1379,30 +2093,9 @@ camera.addEventListener(
 );
 
 
-/* =====================================================
-   LETTER WINDOWS
-===================================================== */
-
-const letterOverlay =
-    document.getElementById(
-        "letterOverlay"
-    );
-
-const letterTitle =
-    document.getElementById(
-        "letterTitle"
-    );
-
-const letterText =
-    document.getElementById(
-        "letterText"
-    );
-
-const closeLetter =
-    document.getElementById(
-        "closeLetter"
-    );
-
+/* =========================================================
+   OPEN LETTER
+========================================================= */
 
 document
     .querySelectorAll(".flower")
@@ -1417,20 +2110,61 @@ document
                         "locked"
                     )
                 ) {
+
                     return;
+
                 }
 
 
-                const id =
+                currentFlower =
                     flower.dataset.letter;
+
+
+                const information =
+                    flowerInformation[
+                        currentFlower
+                    ];
+
+
+                flowerInfoTitle.textContent =
+                    information.title;
+
+                flowerInfoSubtitle.textContent =
+                    information.subtitle;
+
+                flowerInfoText.textContent =
+                    information.text;
 
 
                 letterTitle.textContent =
                     flower.dataset.name;
 
-
                 letterText.textContent =
-                    letters[id];
+                    personalLetters[
+                        currentFlower
+                    ];
+
+
+                /* reset to flower tab */
+
+                showTab("flower");
+
+
+                /* video only belongs to rose */
+
+                if (
+                    currentFlower === "rose"
+                ) {
+
+                    videoBookmark.style.display =
+                        "flex";
+
+                } else {
+
+                    videoBookmark.style.display =
+                        "none";
+
+                }
 
 
                 letterOverlay.classList.add(
@@ -1443,7 +2177,115 @@ document
     });
 
 
-/* close button */
+/* =========================================================
+   TABS
+========================================================= */
+
+function showTab(tab) {
+
+    flowerInfo.classList.remove(
+        "active"
+    );
+
+    myLetter.classList.remove(
+        "active"
+    );
+
+    videoPanel.classList.remove(
+        "active"
+    );
+
+
+    document
+        .querySelectorAll(".bookmark")
+        .forEach(bookmark => {
+
+            bookmark.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if (tab === "flower") {
+
+        flowerInfo.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if (tab === "letter") {
+
+        myLetter.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if (tab === "video") {
+
+        videoPanel.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const selected =
+        document.querySelector(
+            `.bookmark[data-tab="${tab}"]`
+        );
+
+
+    if (selected) {
+
+        selected.classList.add(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* bookmark clicks */
+
+document
+    .querySelectorAll(".bookmark")
+    .forEach(bookmark => {
+
+        bookmark.addEventListener(
+            "click",
+            () => {
+
+                const tab =
+                    bookmark.dataset.tab;
+
+
+                if (
+                    tab === "video" &&
+                    currentFlower !== "rose"
+                ) {
+
+                    return;
+
+                }
+
+
+                showTab(tab);
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
 
 closeLetter.addEventListener(
     "click",
@@ -1456,8 +2298,6 @@ closeLetter.addEventListener(
     }
 );
 
-
-/* click outside letter */
 
 letterOverlay.addEventListener(
     "click",
