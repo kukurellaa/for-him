@@ -1,365 +1,1466 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Little Place For You</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
+<title>For Tharuk</title>
+
+<style>
+/* =========================================================
+   BASIC PAGE
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #526b3c;
+    color: #fff;
+}
+
+.garden {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    /* layered grass texture */
+    background:
+        radial-gradient(circle at 15% 25%, rgba(255,255,255,.035) 0 2px, transparent 3px),
+        radial-gradient(circle at 75% 70%, rgba(20,45,15,.10) 0 2px, transparent 3px),
+        radial-gradient(circle at 45% 50%, rgba(255,255,255,.025) 0 1px, transparent 3px),
+        linear-gradient(135deg, #6e8750, #536d3d 55%, #455e34);
+
+    background-size:
+        38px 38px,
+        52px 52px,
+        27px 27px,
+        100% 100%;
+}
+
+
+/* =========================================================
+   TOP RIGHT MESSAGE
+========================================================= */
+
+.introduction {
+    position: absolute;
+    top: 42px;
+    right: 55px;
+    width: min(430px, 42vw);
+    text-align: right;
+    z-index: 20;
+}
+
+.introduction h1 {
+    margin: 0;
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: normal;
+    letter-spacing: -2px;
+    text-shadow: 0 3px 15px rgba(0,0,0,.22);
+}
+
+.introduction p {
+    margin: 12px 0 0;
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.92);
+    text-shadow: 0 2px 8px rgba(0,0,0,.20);
+}
+
+
+/* =========================================================
+   INSTRUCTIONS BOX
+========================================================= */
+
+.instructions {
+    position: absolute;
+    left: 35px;
+    bottom: 32px;
+    width: 315px;
+    padding: 19px 23px;
+
+    background: rgba(244, 239, 221, .91);
+    color: #3f4c32;
+
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.18);
+
+    z-index: 30;
+}
+
+.instructions strong {
+    display: block;
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.instructions p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   FLOWERS
+========================================================= */
+
+.flower {
+    position: absolute;
+    width: 190px;
+    height: 220px;
+
+    cursor: pointer;
+    user-select: none;
+
+    transform-origin: center center;
+
+    transition:
+        transform .35s ease,
+        filter .35s ease;
+
+    z-index: 5;
+}
+
+.flower:hover {
+    transform: scale(1.035);
+}
+
+.flower.locked {
+    filter: saturate(.82) brightness(.94);
+}
+
+.flower.unlocked {
+    filter: saturate(1.05);
+}
+
+
+/* stems */
+
+.stem {
+    position: absolute;
+    width: 7px;
+    height: 145px;
+
+    left: 94px;
+    top: 63px;
+
+    background: linear-gradient(
+        90deg,
+        #36552d,
+        #607a3d,
+        #344f2b
+    );
+
+    border-radius: 100%;
+    transform: rotate(-5deg);
+    transform-origin: top;
+}
+
+
+/* leaves */
+
+.leaf {
+    position: absolute;
+    width: 52px;
+    height: 25px;
+
+    background: linear-gradient(
+        135deg,
+        #718c48,
+        #385d32
+    );
+
+    border-radius: 100% 0 100% 0;
+
+    transform-origin: right center;
+
+    box-shadow:
+        inset 2px 2px 4px rgba(255,255,255,.12),
+        2px 4px 5px rgba(0,0,0,.15);
+}
+
+.leaf.one {
+    left: 43px;
+    top: 118px;
+    transform: rotate(20deg);
+}
+
+.leaf.two {
+    left: 98px;
+    top: 94px;
+    transform: rotate(164deg);
+}
+
+
+/* =========================================================
+   LANTANA
+========================================================= */
+
+.lantana {
+    left: 15%;
+    top: 43%;
+}
+
+.lantana .flower-head {
+    position: absolute;
+    left: 38px;
+    top: 12px;
+    width: 115px;
+    height: 105px;
+}
+
+.lantana .mini {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
+.lantana .mini::before,
+.lantana .mini::after {
+    content: "";
+    position: absolute;
+    width: 17px;
+    height: 25px;
+    border-radius: 50%;
+    background: #efa4ba;
+    left: 8px;
+    top: -4px;
+    transform-origin: 8px 21px;
+}
+
+.lantana .mini::after {
+    transform: rotate(72deg);
+}
+
+.lantana .mini {
+    background: #f2c34c;
+    box-shadow: 0 2px 4px rgba(0,0,0,.18);
+}
+
+.lantana .m1 { left: 35px; top: 4px; }
+.lantana .m2 { left: 4px; top: 25px; }
+.lantana .m3 { left: 65px; top: 28px; }
+.lantana .m4 { left: 26px; top: 53px; }
+.lantana .m5 { left: 73px; top: 62px; }
+
+
+/* =========================================================
+   CHINCHERINCHEE
+========================================================= */
+
+.chincherinchee {
+    left: 39%;
+    top: 25%;
+}
+
+.chincherinchee .stem {
+    height: 155px;
+}
+
+.chincherinchee .flower-head {
+    position: absolute;
+    left: 46px;
+    top: 5px;
+    width: 105px;
+    height: 115px;
+}
+
+/* each little white flower */
+.chincherinchee .small-flower {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+}
+
+.chincherinchee .small-flower span {
+    position: absolute;
+    width: 16px;
+    height: 25px;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #e8e9df
+    );
+
+    border-radius: 60% 60% 45% 45%;
+    left: 13px;
+    top: 1px;
+
+    transform-origin: 8px 20px;
+
+    box-shadow:
+        0 1px 3px rgba(0,0,0,.13);
+}
+
+.chincherinchee .small-flower span:nth-child(2) {
+    transform: rotate(90deg);
+}
+
+.chincherinchee .small-flower span:nth-child(3) {
+    transform: rotate(180deg);
+}
+
+.chincherinchee .small-flower span:nth-child(4) {
+    transform: rotate(270deg);
+}
+
+.chincherinchee .small-flower i {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d8b54b;
+    left: 16px;
+    top: 16px;
+    z-index: 2;
+}
+
+.chincherinchee .f1 {
+    left: 4px;
+    top: 17px;
+}
+
+.chincherinchee .f2 {
+    left: 43px;
+    top: 4px;
+}
+
+.chincherinchee .f3 {
+    left: 35px;
+    top: 48px;
+}
+
+
+/* =========================================================
+   DAMASK ROSE
+========================================================= */
+
+.rose {
+    left: 66%;
+    top: 48%;
+}
+
+.rose .flower-head {
+    position: absolute;
+    width: 128px;
+    height: 128px;
+    left: 30px;
+    top: 2px;
+}
+
+/* layered curved rose petals */
+
+.rose .petal {
+    position: absolute;
+
+    background: linear-gradient(
+        135deg,
+        #ff3d78,
+        #c7144d
+    );
+
+    border-radius: 58% 42% 60% 40%;
+
+    box-shadow:
+        inset -4px -4px 7px rgba(100,0,35,.15),
+        1px 2px 4px rgba(0,0,0,.14);
+}
+
+.rose .p1 {
+    width: 66px;
+    height: 82px;
+    left: 31px;
+    top: 12px;
+    transform: rotate(7deg);
+}
+
+.rose .p2 {
+    width: 73px;
+    height: 55px;
+    left: 8px;
+    top: 40px;
+    transform: rotate(-42deg);
+}
+
+.rose .p3 {
+    width: 75px;
+    height: 58px;
+    right: 5px;
+    top: 38px;
+    transform: rotate(39deg);
+}
+
+.rose .p4 {
+    width: 62px;
+    height: 68px;
+    left: 31px;
+    bottom: 1px;
+    transform: rotate(180deg);
+}
+
+.rose .p5 {
+    width: 46px;
+    height: 50px;
+    left: 42px;
+    top: 42px;
+    background: linear-gradient(
+        135deg,
+        #ff5689,
+        #b70d43
+    );
+    transform: rotate(-15deg);
+}
+
+.rose .center {
+    position: absolute;
+    width: 29px;
+    height: 29px;
+    left: 50px;
+    top: 51px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ff8cae 0 20%,
+            #d71854 21% 48%,
+            #8f0c39 49%
+        );
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   PERENNIAL ASTER
+========================================================= */
+
+.aster {
+    left: 77%;
+    top: 20%;
+}
+
+.aster .flower-head {
+    position: absolute;
+    left: 36px;
+    top: 8px;
+    width: 120px;
+    height: 120px;
+}
+
+.aster .petal {
+    position: absolute;
+    width: 19px;
+    height: 57px;
+
+    left: 51px;
+    top: 5px;
+
+    background: linear-gradient(
+        90deg,
+        #7652b8,
+        #aa82dc,
+        #6846a7
+    );
+
+    border-radius: 55% 55% 45% 45%;
+
+    transform-origin: 9px 55px;
+
+    box-shadow: 1px 2px 3px rgba(0,0,0,.13);
+}
+
+.aster .petal:nth-child(1) { transform: rotate(0deg); }
+.aster .petal:nth-child(2) { transform: rotate(30deg); }
+.aster .petal:nth-child(3) { transform: rotate(60deg); }
+.aster .petal:nth-child(4) { transform: rotate(90deg); }
+.aster .petal:nth-child(5) { transform: rotate(120deg); }
+.aster .petal:nth-child(6) { transform: rotate(150deg); }
+.aster .petal:nth-child(7) { transform: rotate(180deg); }
+.aster .petal:nth-child(8) { transform: rotate(210deg); }
+.aster .petal:nth-child(9) { transform: rotate(240deg); }
+.aster .petal:nth-child(10) { transform: rotate(270deg); }
+.aster .petal:nth-child(11) { transform: rotate(300deg); }
+.aster .petal:nth-child(12) { transform: rotate(330deg); }
+
+.aster .center {
+    position: absolute;
+
+    width: 39px;
+    height: 39px;
+
+    left: 42px;
+    top: 42px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #e8bd48 0 35%,
+            #b98624 36% 65%,
+            #79591b 66%
+        );
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   FLOWER NAMES
+========================================================= */
+
+.flower-name {
+    position: absolute;
+
+    width: 190px;
+
+    left: 0;
+    top: 166px;
+
+    text-align: center;
+
+    font-size: 15px;
+    letter-spacing: .3px;
+
+    color: rgba(255,255,255,.94);
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.45);
+}
+
+
+/* =========================================================
+   LOCKED / UNLOCKED
+========================================================= */
+
+.lock {
+    position: absolute;
+
+    left: 84px;
+    top: 142px;
+
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    background: rgba(30,30,25,.65);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+
+    opacity: .85;
+}
+
+.flower.unlocked .lock {
+    background: rgba(236,202,93,.95);
+    color: #4a3b18;
+}
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+.camera {
+    position: absolute;
+
+    width: 108px;
+    height: 70px;
+
+    right: 48px;
+    top: 170px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #454545,
+            #1d1d1d
+        );
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 9px 20px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.15);
+
+    cursor: grab;
+
+    z-index: 50;
+
+    touch-action: none;
+
+    transition: transform .15s ease;
+}
+
+.camera:active {
+    cursor: grabbing;
+}
+
+.camera::before {
+    content: "";
+
+    position: absolute;
+
+    width: 34px;
+    height: 10px;
+
+    left: 15px;
+    top: -8px;
+
+    background: #292929;
+
+    border-radius: 5px 5px 0 0;
+}
+
+.camera::after {
+    content: "";
+
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    right: 12px;
+    top: 11px;
+
+    border-radius: 50%;
+
+    background: #b84a4a;
+
+    box-shadow:
+        0 0 5px rgba(255,80,80,.6);
+}
+
+.lens {
+    position: absolute;
+
+    width: 46px;
+    height: 46px;
+
+    left: 31px;
+    top: 13px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #687b82 0 8%,
+            #19282c 9% 35%,
+            #050708 36% 100%
+        );
+
+    border: 5px solid #777;
+
+    box-shadow:
+        inset 0 0 8px rgba(255,255,255,.1),
+        0 2px 5px rgba(0,0,0,.35);
+}
+
+.camera-label {
+    position: absolute;
+
+    width: 150px;
+
+    left: -21px;
+    top: 78px;
+
+    text-align: center;
+
+    color: white;
+
+    font-size: 12px;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.5);
+}
+
+
+/* =========================================================
+   CAMERA TARGET
+========================================================= */
+
+.flower.photo-target {
+    filter:
+        brightness(1.12)
+        saturate(1.15)
+        drop-shadow(0 0 9px rgba(255,255,255,.45));
+}
+
+
+/* =========================================================
+   FLASH
+========================================================= */
+
+.flash {
+    position: fixed;
+
+    inset: 0;
+
+    background: white;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 999;
+
+    transition: opacity .08s ease;
+}
+
+.flash.active {
+    opacity: .92;
+}
+
+
+/* =========================================================
+   LETTER MODAL
+========================================================= */
+
+.letter-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(25,35,22,.52);
+
+    backdrop-filter: blur(5px);
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity .3s ease;
+
+    z-index: 800;
+}
+
+.letter-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.letter {
+    width: min(620px, 86vw);
+    max-height: 78vh;
+    overflow-y: auto;
+
+    padding: 48px 52px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8f1df,
+            #eee3c8
+        );
+
+    color: #443e32;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.38);
+
+    transform: translateY(18px) scale(.98);
+
+    transition: transform .3s ease;
+}
+
+.letter-overlay.show .letter {
+    transform: translateY(0) scale(1);
+}
+
+.letter h2 {
+    margin: 0 0 22px;
+
+    font-size: 30px;
+
+    font-weight: normal;
+}
+
+.letter p {
+    font-size: 17px;
+    line-height: 1.8;
+
+    white-space: pre-line;
+}
+
+.close-letter {
+    margin-top: 24px;
+
+    border: none;
+
+    background: #536c3d;
+
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-family: Georgia, serif;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .introduction {
+        top: 22px;
+        right: 22px;
+        width: 280px;
     }
 
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Georgia, serif;
-      background: #789b58;
+    .introduction h1 {
+        font-size: 43px;
     }
 
-    .garden {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,.08) 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 65%, rgba(30,70,20,.12) 0 2px, transparent 3px),
-        linear-gradient(145deg, #8bad68, #638a4c);
-      background-size: 45px 45px, 60px 60px, 100% 100%;
-    }
-
-    .title {
-      position: absolute;
-      top: 35px;
-      left: 45px;
-      color: white;
-      text-shadow: 0 2px 8px rgba(0,0,0,.25);
-      z-index: 5;
-    }
-
-    .title h1 {
-      margin: 0;
-      font-size: 38px;
-      font-weight: normal;
-    }
-
-    .title p {
-      margin-top: 8px;
-      font-size: 17px;
-    }
-
-    .flower {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      cursor: pointer;
-      transition: transform .25s ease;
-      user-select: none;
-    }
-
-    .flower:hover {
-      transform: scale(1.08);
-    }
-
-    .petals {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-
-    .petal {
-      position: absolute;
-      width: 38px;
-      height: 55px;
-      border-radius: 50%;
-      left: 41px;
-      top: 5px;
-      transform-origin: 19px 55px;
-    }
-
-    .center {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      left: 45px;
-      top: 45px;
-      background: #d99b28;
-      z-index: 2;
-    }
-
-    /* Lantana */
-    .lantana {
-      left: 18%;
-      top: 42%;
-    }
-
-    .lantana .petal {
-      width: 28px;
-      height: 38px;
-      left: 46px;
-      top: 15px;
-      background: #f4a5bd;
-      transform-origin: 14px 38px;
-    }
-
-    .lantana .petal:nth-child(2) { transform: rotate(72deg); }
-    .lantana .petal:nth-child(3) { transform: rotate(144deg); }
-    .lantana .petal:nth-child(4) { transform: rotate(216deg); }
-    .lantana .petal:nth-child(5) { transform: rotate(288deg); }
-
-    /* Chincherinchee */
-    .chincherinchee {
-      left: 42%;
-      top: 25%;
-    }
-
-    .chincherinchee .petal {
-      background: white;
-      width: 35px;
-      height: 48px;
-      left: 42px;
-      top: 7px;
-    }
-
-    .chincherinchee .petal:nth-child(2) { transform: rotate(90deg); }
-    .chincherinchee .petal:nth-child(3) { transform: rotate(180deg); }
-    .chincherinchee .petal:nth-child(4) { transform: rotate(270deg); }
-
-    /* Damask rose */
-    .rose {
-      left: 68%;
-      top: 50%;
-    }
-
-    .rose .petal {
-      background: #e91e63;
-      width: 43px;
-      height: 48px;
-      left: 39px;
-      top: 10px;
-    }
-
-    .rose .petal:nth-child(2) { transform: rotate(72deg); }
-    .rose .petal:nth-child(3) { transform: rotate(144deg); }
-    .rose .petal:nth-child(4) { transform: rotate(216deg); }
-    .rose .petal:nth-child(5) { transform: rotate(288deg); }
-
-    /* Perennial aster */
-    .aster {
-      left: 77%;
-      top: 22%;
-    }
-
-    .aster .petal {
-      background: #9b6cff;
-      width: 30px;
-      height: 50px;
-      left: 45px;
-      top: 7px;
-    }
-
-    .aster .petal:nth-child(2) { transform: rotate(45deg); }
-    .aster .petal:nth-child(3) { transform: rotate(90deg); }
-    .aster .petal:nth-child(4) { transform: rotate(135deg); }
-    .aster .petal:nth-child(5) { transform: rotate(180deg); }
-    .aster .petal:nth-child(6) { transform: rotate(225deg); }
-    .aster .petal:nth-child(7) { transform: rotate(270deg); }
-    .aster .petal:nth-child(8) { transform: rotate(315deg); }
-
-    .camera {
-      position: absolute;
-      top: 35px;
-      right: 45px;
-      width: 115px;
-      height: 75px;
-      background: #252525;
-      border-radius: 12px;
-      cursor: grab;
-      z-index: 20;
-      box-shadow: 0 8px 20px rgba(0,0,0,.3);
-      touch-action: none;
-    }
-
-    .camera:active {
-      cursor: grabbing;
-    }
-
-    .camera::before {
-      content: "";
-      position: absolute;
-      width: 38px;
-      height: 12px;
-      background: #333;
-      top: -10px;
-      left: 15px;
-      border-radius: 5px 5px 0 0;
-    }
-
-    .lens {
-      position: absolute;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: #111;
-      border: 6px solid #777;
-      left: 35px;
-      top: 15px;
-    }
-
-    .camera-label {
-      position: absolute;
-      top: 82px;
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-size: 13px;
-      pointer-events: none;
+    .introduction p {
+        font-size: 13px;
     }
 
     .instructions {
-      position: absolute;
-      bottom: 30px;
-      left: 35px;
-      padding: 18px 22px;
-      width: 270px;
-      background: rgba(255,255,255,.86);
-      border-radius: 14px;
-      color: #3d5033;
-      box-shadow: 0 8px 25px rgba(0,0,0,.15);
-      z-index: 10;
+        left: 18px;
+        bottom: 18px;
+        width: 270px;
+        padding: 15px 18px;
     }
 
-    .instructions strong {
-      font-size: 18px;
+    .camera {
+        right: 25px;
+        top: 145px;
     }
 
-    .instructions p {
-      margin-bottom: 0;
-      line-height: 1.5;
+    .flower {
+        transform: scale(.78);
     }
-  </style>
+
+    .flower:hover {
+        transform: scale(.82);
+    }
+
+    .lantana {
+        left: 3%;
+        top: 40%;
+    }
+
+    .chincherinchee {
+        left: 33%;
+        top: 27%;
+    }
+
+    .rose {
+        left: 48%;
+        top: 52%;
+    }
+
+    .aster {
+        left: 67%;
+        top: 31%;
+    }
+
+    .letter {
+        padding: 35px 28px;
+    }
+}
+</style>
 </head>
+
 
 <body>
 
-  <div class="garden">
+<div class="garden">
 
-    <div class="title">
-      <h1>A little place for you ♡</h1>
-      <p>Take your time. There are a few things waiting for you here.</p>
+    <!-- =====================================================
+         INTRODUCTION
+    ====================================================== -->
+
+    <div class="introduction">
+
+        <h1>for tharuk</h1>
+
+        <p>
+            i know I dont always have the right thing to say to you sometimes,
+            so I thought id make this for you
+        </p>
+
     </div>
 
-    <!-- Lantana -->
-    <div class="flower lantana" data-flower="Lantana">
-      <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-      </div>
-      <div class="center"></div>
-    </div>
 
-    <!-- Chincherinchee -->
-    <div class="flower chincherinchee" data-flower="Chincherinchee">
-      <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-      </div>
-      <div class="center"></div>
-    </div>
-
-    <!-- Damask Rose -->
-    <div class="flower rose" data-flower="Damask Rose">
-      <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-      </div>
-      <div class="center"></div>
-    </div>
-
-    <!-- Perennial Aster -->
-    <div class="flower aster" data-flower="Perennial Aster">
-      <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-      </div>
-      <div class="center"></div>
-    </div>
-
-    <!-- Camera -->
-    <div class="camera" id="camera">
-      <div class="lens"></div>
-      <div class="camera-label">drag me ♡</div>
-    </div>
+    <!-- =====================================================
+         INSTRUCTIONS
+    ====================================================== -->
 
     <div class="instructions">
-      <strong>how this works</strong>
-      <p>
-        There's no rush here.<br>
-        Drag the camera around the garden.
-        Eventually, you'll find little things waiting for you.
-      </p>
+
+        <strong>how this works</strong>
+
+        <p>
+            no rush here, take pictures of the flowers using the camera
+            and eventually, you'll find little things waiting for you.
+        </p>
+
     </div>
 
-  </div>
 
-  <script>
-    const camera = document.getElementById("camera");
+    <!-- =====================================================
+         LANTANA
+    ====================================================== -->
 
-    let dragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
+    <div class="flower lantana locked"
+         data-name="Lantana"
+         data-letter="lantana">
 
-    camera.addEventListener("pointerdown", (e) => {
-      dragging = true;
+        <div class="stem"></div>
+        <div class="leaf one"></div>
+        <div class="leaf two"></div>
 
-      const rect = camera.getBoundingClientRect();
+        <div class="flower-head">
 
-      offsetX = e.clientX - rect.left;
-      offsetY = e.clientY - rect.top;
+            <div class="mini m1"></div>
+            <div class="mini m2"></div>
+            <div class="mini m3"></div>
+            <div class="mini m4"></div>
+            <div class="mini m5"></div>
 
-      camera.setPointerCapture(e.pointerId);
-    });
+        </div>
 
-    camera.addEventListener("pointermove", (e) => {
-      if (!dragging) return;
+        <div class="lock">♡</div>
 
-      let x = e.clientX - offsetX;
-      let y = e.clientY - offsetY;
+        <div class="flower-name">
+            Lantana
+        </div>
 
-      x = Math.max(0, Math.min(window.innerWidth - camera.offsetWidth, x));
-      y = Math.max(0, Math.min(window.innerHeight - camera.offsetHeight, y));
+    </div>
 
-      camera.style.left = x + "px";
-      camera.style.top = y + "px";
-      camera.style.right = "auto";
-    });
 
-    camera.addEventListener("pointerup", () => {
-      dragging = false;
-    });
+    <!-- =====================================================
+         CHINCHERINCHEE
+    ====================================================== -->
+
+    <div class="flower chincherinchee locked"
+         data-name="Chincherinchee"
+         data-letter="chincherinchee">
+
+        <div class="stem"></div>
+        <div class="leaf one"></div>
+        <div class="leaf two"></div>
+
+        <div class="flower-head">
+
+            <div class="small-flower f1">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+
+            <div class="small-flower f2">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+
+            <div class="small-flower f3">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+
+        </div>
+
+        <div class="lock">♡</div>
+
+        <div class="flower-name">
+            Chincherinchee
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DAMASK ROSE
+    ====================================================== -->
+
+    <div class="flower rose locked"
+         data-name="Damask Rose"
+         data-letter="rose">
+
+        <div class="stem"></div>
+        <div class="leaf one"></div>
+        <div class="leaf two"></div>
+
+        <div class="flower-head">
+
+            <div class="petal p1"></div>
+            <div class="petal p2"></div>
+            <div class="petal p3"></div>
+            <div class="petal p4"></div>
+            <div class="petal p5"></div>
+
+            <div class="center"></div>
+
+        </div>
+
+        <div class="lock">♡</div>
+
+        <div class="flower-name">
+            Damask Rose
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PERENNIAL ASTER
+    ====================================================== -->
+
+    <div class="flower aster locked"
+         data-name="Perennial Aster"
+         data-letter="aster">
+
+        <div class="stem"></div>
+        <div class="leaf one"></div>
+        <div class="leaf two"></div>
+
+        <div class="flower-head">
+
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+
+            <div class="center"></div>
+
+        </div>
+
+        <div class="lock">♡</div>
+
+        <div class="flower-name">
+            Perennial Aster
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CAMERA
+    ====================================================== -->
+
+    <div class="camera" id="camera">
+
+        <div class="lens"></div>
+
+        <div class="camera-label">
+            drag me ♡
+        </div>
+
+    </div>
+
+
+    <!-- CAMERA FLASH -->
+
+    <div class="flash" id="flash"></div>
+
+
+    <!-- =====================================================
+         LETTER WINDOW
+    ====================================================== -->
+
+    <div class="letter-overlay" id="letterOverlay">
+
+        <div class="letter">
+
+            <h2 id="letterTitle"></h2>
+
+            <p id="letterText"></p>
+
+            <button class="close-letter" id="closeLetter">
+                close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   YOUR LETTERS
+   =========================================================
+
+   THIS IS THE PART YOU WILL EDIT.
+
+   Replace the text between the backticks with whatever
+   you want each letter to say.
+
+========================================================= */
+
+const letters = {
+
+    lantana: `
+PUT YOUR LANTANA LETTER HERE.
+
+You can write as much as you want.
+Line breaks will stay exactly how you write them.
+`,
+
+    chincherinchee: `
+PUT YOUR CHINCHERINCHEE LETTER HERE.
+`,
+
+    rose: `
+PUT YOUR DAMASK ROSE LETTER HERE.
+`,
+
+    aster: `
+PUT YOUR PERENNIAL ASTER LETTER HERE.
+`
+
+};
+
+
+/* =========================================================
+   CAMERA DRAGGING
+========================================================= */
+
+const camera = document.getElementById("camera");
+const flash = document.getElementById("flash");
+
+let dragging = false;
+let offsetX = 0;
+let offsetY = 0;
+
+
+/* =========================================================
+   FIND WHICH FLOWER THE CAMERA IS OVER
+========================================================= */
+
+let currentTarget = null;
+
+function checkCameraTarget() {
+
+    const cameraRect = camera.getBoundingClientRect();
+
+    const cameraCenterX =
+        cameraRect.left + cameraRect.width / 2;
+
+    const cameraCenterY =
+        cameraRect.top + cameraRect.height / 2;
+
+
+    let closestFlower = null;
+    let closestDistance = Infinity;
+
 
     document.querySelectorAll(".flower").forEach(flower => {
-      flower.addEventListener("click", () => {
-        alert("You found the " + flower.dataset.flower + " ♡");
-      });
+
+        const rect = flower.getBoundingClientRect();
+
+        const flowerCenterX =
+            rect.left + rect.width / 2;
+
+        const flowerCenterY =
+            rect.top + rect.height / 2;
+
+
+        const distance = Math.sqrt(
+            Math.pow(cameraCenterX - flowerCenterX, 2) +
+            Math.pow(cameraCenterY - flowerCenterY, 2)
+        );
+
+
+        /*
+          The camera only recognizes a flower when
+          it is reasonably close to the center.
+        */
+
+        if (
+            distance < 105 &&
+            distance < closestDistance
+        ) {
+
+            closestDistance = distance;
+            closestFlower = flower;
+
+        }
+
     });
-  </script>
+
+
+    document.querySelectorAll(".flower").forEach(flower => {
+        flower.classList.remove("photo-target");
+    });
+
+
+    if (closestFlower) {
+
+        closestFlower.classList.add("photo-target");
+
+        currentTarget = closestFlower;
+
+    } else {
+
+        currentTarget = null;
+
+    }
+
+}
+
+
+/* =========================================================
+   TAKE PHOTO
+========================================================= */
+
+function takePhoto(flower) {
+
+    if (!flower || flower.classList.contains("unlocked")) {
+        return;
+    }
+
+
+    /* flash */
+
+    flash.classList.add("active");
+
+
+    setTimeout(() => {
+
+        flash.classList.remove("active");
+
+    }, 120);
+
+
+    /* unlock */
+
+    flower.classList.remove("locked");
+    flower.classList.add("unlocked");
+
+
+    flower.querySelector(".lock").textContent = "✓";
+
+
+    /* little camera movement */
+
+    camera.style.transform = "scale(.94)";
+
+    setTimeout(() => {
+
+        camera.style.transform = "scale(1)";
+
+    }, 120);
+
+}
+
+
+/* =========================================================
+   CAMERA DRAG
+========================================================= */
+
+camera.addEventListener("pointerdown", event => {
+
+    dragging = true;
+
+    const rect = camera.getBoundingClientRect();
+
+    offsetX = event.clientX - rect.left;
+    offsetY = event.clientY - rect.top;
+
+    camera.setPointerCapture(event.pointerId);
+
+});
+
+
+camera.addEventListener("pointermove", event => {
+
+    if (!dragging) {
+        return;
+    }
+
+
+    let x =
+        event.clientX - offsetX;
+
+    let y =
+        event.clientY - offsetY;
+
+
+    x = Math.max(
+        0,
+        Math.min(
+            window.innerWidth - camera.offsetWidth,
+            x
+        )
+    );
+
+
+    y = Math.max(
+        0,
+        Math.min(
+            window.innerHeight - camera.offsetHeight,
+            y
+        )
+    );
+
+
+    camera.style.left = x + "px";
+    camera.style.top = y + "px";
+    camera.style.right = "auto";
+
+
+    checkCameraTarget();
+
+});
+
+
+camera.addEventListener("pointerup", event => {
+
+    dragging = false;
+
+    checkCameraTarget();
+
+
+    /*
+      If the camera is over a flower when released,
+      take the picture.
+    */
+
+    if (currentTarget) {
+
+        takePhoto(currentTarget);
+
+    }
+
+});
+
+
+camera.addEventListener("pointercancel", () => {
+
+    dragging = false;
+
+});
+
+
+/* =========================================================
+   LETTER WINDOWS
+========================================================= */
+
+const letterOverlay =
+    document.getElementById("letterOverlay");
+
+const letterTitle =
+    document.getElementById("letterTitle");
+
+const letterText =
+    document.getElementById("letterText");
+
+const closeLetter =
+    document.getElementById("closeLetter");
+
+
+document.querySelectorAll(".flower").forEach(flower => {
+
+    flower.addEventListener("click", () => {
+
+        /*
+          Locked flowers cannot be opened.
+        */
+
+        if (flower.classList.contains("locked")) {
+
+            return;
+
+        }
+
+
+        const letterID =
+            flower.dataset.letter;
+
+
+        letterTitle.textContent =
+            flower.dataset.name;
+
+
+        letterText.textContent =
+            letters[letterID];
+
+
+        letterOverlay.classList.add("show");
+
+    });
+
+});
+
+
+closeLetter.addEventListener("click", () => {
+
+    letterOverlay.classList.remove("show");
+
+});
+
+
+letterOverlay.addEventListener("click", event => {
+
+    if (event.target === letterOverlay) {
+
+        letterOverlay.classList.remove("show");
+
+    }
+
+});
+
+
+/* =========================================================
+   INITIAL CHECK
+========================================================= */
+
+checkCameraTarget();
+
+</script>
 
 </body>
 </html>
