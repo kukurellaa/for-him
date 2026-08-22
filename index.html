@@ -42,10 +42,8 @@ body {
 
 .garden {
     position: relative;
-
     width: 100vw;
     height: 100vh;
-
     overflow: hidden;
 
     background:
@@ -58,9 +56,6 @@ body {
     background-size: cover;
     background-position: center;
 }
-
-
-/* sunlight */
 
 .garden::before {
     content: "";
@@ -84,9 +79,6 @@ body {
 
     z-index: 1;
 }
-
-
-/* subtle texture */
 
 .garden::after {
     content: "";
@@ -310,7 +302,7 @@ body {
 
 
 /* =========================================================
-   FLOWER NAMES + MOODS
+   FLOWER NAMES + MOOD
 ========================================================= */
 
 .flower-name {
@@ -793,24 +785,15 @@ body {
         brightness(.75);
 }
 
-
-/* GREEN — PERSONAL LETTER */
-
-.bookmark-letter {
+.bookmark-flower {
     background: #789064;
     color: #789064;
 }
 
-
-/* PINK — FLOWER INFORMATION */
-
-.bookmark-flower {
+.bookmark-letter {
     background: #9d6a72;
     color: #9d6a72;
 }
-
-
-/* GOLD — DAMASK ROSE VIDEO */
 
 .bookmark-video {
     background: #8c7952;
@@ -904,9 +887,6 @@ body {
     transform:
         rotate(165deg);
 }
-
-
-/* tiny white roses */
 
 .white-rose {
     position: absolute;
@@ -1017,7 +997,7 @@ body {
 
 
 /* =========================================================
-   PERSONAL LETTER
+   YOUR PERSONAL LETTER
 ========================================================= */
 
 .my-letter {
@@ -1061,6 +1041,21 @@ body {
         rgba(0,0,0,.22);
 }
 
+.video-note {
+    margin-top: 15px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 18px;
+
+    font-style: italic;
+
+    color: #706d5d;
+}
+
 
 /* =========================================================
    CLOSE
@@ -1100,7 +1095,6 @@ body {
 ========================================================= */
 
 @keyframes letterOpen {
-
     from {
         transform:
             translateY(15px)
@@ -1119,7 +1113,6 @@ body {
 }
 
 @keyframes contentFade {
-
     from {
         opacity: 0;
         transform:
@@ -1134,7 +1127,6 @@ body {
 }
 
 @keyframes fadeIn {
-
     from {
         opacity: 0;
         transform:
@@ -1225,13 +1217,7 @@ body {
         font-size: 14px;
         padding-left: 10px;
     }
-
 }
-
-
-/* =========================================================
-   CAMERA / FLOWER SCRIPT
-========================================================= */
 
 </style>
 </head>
@@ -1392,15 +1378,10 @@ body {
     id="camera">
 
     <div class="camera-body"></div>
-
     <div class="camera-top"></div>
-
     <div class="shutter"></div>
-
     <div class="viewfinder"></div>
-
     <div class="camera-lens"></div>
-
     <div class="camera-light"></div>
 
 </div>
@@ -1433,8 +1414,7 @@ body {
 
         <div class="bookmarks">
 
-
-            <!-- PINK BOOKMARK -->
+            <!-- GREEN = FLOWER FACTS -->
 
             <div
                 class="bookmark bookmark-flower"
@@ -1445,8 +1425,7 @@ body {
             </div>
 
 
-            <!-- GREEN BOOKMARK
-                 YOUR PERSONAL LETTER — UNCHANGED -->
+            <!-- PINK = PERSONAL LETTER -->
 
             <div
                 class="bookmark bookmark-letter"
@@ -1457,18 +1436,16 @@ body {
             </div>
 
 
-            <!-- GOLD BOOKMARK
-                 ONLY SHOWN FOR DAMASK ROSE -->
+            <!-- GOLD = DAMASK ROSE VIDEO -->
 
             <div
                 class="bookmark bookmark-video"
                 id="videoBookmark"
                 data-tab="video">
 
-                i love you
+                a little video
 
             </div>
-
 
         </div>
 
@@ -1490,7 +1467,8 @@ body {
 
 
                 <!-- =========================================
-                     FLOWER INFORMATION
+                     ABOUT THIS FLOWER
+                     WRITE YOUR FLOWER FACTS HERE
                 ========================================== -->
 
                 <div
@@ -1513,9 +1491,7 @@ body {
 
                 <!-- =========================================
                      YOUR PERSONAL LETTER
-                     
-                     THIS SECTION IS YOURS.
-                     NOTHING HAS BEEN WRITTEN FOR YOU.
+                     THIS SECTION IS YOURS
                 ========================================== -->
 
                 <div
@@ -1544,7 +1520,7 @@ body {
                     id="videoPanel">
 
                     <h2>
-                        i love you
+                        a video for you
                     </h2>
 
                     <div class="letter-subtitle">
@@ -1563,6 +1539,14 @@ body {
                         Your browser does not support video.
 
                     </video>
+
+                    <div class="video-note">
+
+                        I wanted you to have something
+                        you could come back to whenever
+                        you needed it.
+
+                    </div>
 
                 </div>
 
@@ -1594,6 +1578,11 @@ body {
 
 /* =========================================================
    FLOWER INFORMATION
+=========================================================
+
+   PUT YOUR FLOWER FACTS IN THE "text" SECTION
+   FOR EACH FLOWER.
+
 ========================================================= */
 
 const flowerInformation = {
@@ -1650,10 +1639,11 @@ const flowerInformation = {
 
 /* =========================================================
    YOUR PERSONAL LETTERS
+=========================================================
 
-   WRITE YOUR OWN LETTERS BETWEEN THE BACKTICKS.
+   THESE ARE YOUR LETTERS.
+   WRITE THEM YOURSELF BETWEEN THE BACKTICKS.
 
-   NOTHING IS WRITTEN FOR YOU HERE.
 ========================================================= */
 
 const personalLetters = {
@@ -2052,8 +2042,6 @@ document
 
                 showTab("flower");
 
-
-                /* GOLD BOOKMARK ONLY FOR DAMASK ROSE */
 
                 if (
                     currentFlower === "rose"
