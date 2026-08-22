@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little Place For You</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Georgia, serif;
+      background: #789b58;
+    }
+
+    .garden {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.08) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 65%, rgba(30,70,20,.12) 0 2px, transparent 3px),
+        linear-gradient(145deg, #8bad68, #638a4c);
+      background-size: 45px 45px, 60px 60px, 100% 100%;
+    }
+
+    .title {
+      position: absolute;
+      top: 35px;
+      left: 45px;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,.25);
+      z-index: 5;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 38px;
+      font-weight: normal;
+    }
+
+    .title p {
+      margin-top: 8px;
+      font-size: 17px;
+    }
+
+    .flower {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      cursor: pointer;
+      transition: transform .25s ease;
+      user-select: none;
+    }
+
+    .flower:hover {
+      transform: scale(1.08);
+    }
+
+    .petals {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .petal {
+      position: absolute;
+      width: 38px;
+      height: 55px;
+      border-radius: 50%;
+      left: 41px;
+      top: 5px;
+      transform-origin: 19px 55px;
+    }
+
+    .center {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      left: 45px;
+      top: 45px;
+      background: #d99b28;
+      z-index: 2;
+    }
+
+    /* Lantana */
+    .lantana {
+      left: 18%;
+      top: 42%;
+    }
+
+    .lantana .petal {
+      width: 28px;
+      height: 38px;
+      left: 46px;
+      top: 15px;
+      background: #f4a5bd;
+      transform-origin: 14px 38px;
+    }
+
+    .lantana .petal:nth-child(2) { transform: rotate(72deg); }
+    .lantana .petal:nth-child(3) { transform: rotate(144deg); }
+    .lantana .petal:nth-child(4) { transform: rotate(216deg); }
+    .lantana .petal:nth-child(5) { transform: rotate(288deg); }
+
+    /* Chincherinchee */
+    .chincherinchee {
+      left: 42%;
+      top: 25%;
+    }
+
+    .chincherinchee .petal {
+      background: white;
+      width: 35px;
+      height: 48px;
+      left: 42px;
+      top: 7px;
+    }
+
+    .chincherinchee .petal:nth-child(2) { transform: rotate(90deg); }
+    .chincherinchee .petal:nth-child(3) { transform: rotate(180deg); }
+    .chincherinchee .petal:nth-child(4) { transform: rotate(270deg); }
+
+    /* Damask rose */
+    .rose {
+      left: 68%;
+      top: 50%;
+    }
+
+    .rose .petal {
+      background: #e91e63;
+      width: 43px;
+      height: 48px;
+      left: 39px;
+      top: 10px;
+    }
+
+    .rose .petal:nth-child(2) { transform: rotate(72deg); }
+    .rose .petal:nth-child(3) { transform: rotate(144deg); }
+    .rose .petal:nth-child(4) { transform: rotate(216deg); }
+    .rose .petal:nth-child(5) { transform: rotate(288deg); }
+
+    /* Perennial aster */
+    .aster {
+      left: 77%;
+      top: 22%;
+    }
+
+    .aster .petal {
+      background: #9b6cff;
+      width: 30px;
+      height: 50px;
+      left: 45px;
+      top: 7px;
+    }
+
+    .aster .petal:nth-child(2) { transform: rotate(45deg); }
+    .aster .petal:nth-child(3) { transform: rotate(90deg); }
+    .aster .petal:nth-child(4) { transform: rotate(135deg); }
+    .aster .petal:nth-child(5) { transform: rotate(180deg); }
+    .aster .petal:nth-child(6) { transform: rotate(225deg); }
+    .aster .petal:nth-child(7) { transform: rotate(270deg); }
+    .aster .petal:nth-child(8) { transform: rotate(315deg); }
+
+    .camera {
+      position: absolute;
+      top: 35px;
+      right: 45px;
+      width: 115px;
+      height: 75px;
+      background: #252525;
+      border-radius: 12px;
+      cursor: grab;
+      z-index: 20;
+      box-shadow: 0 8px 20px rgba(0,0,0,.3);
+      touch-action: none;
+    }
+
+    .camera:active {
+      cursor: grabbing;
+    }
+
+    .camera::before {
+      content: "";
+      position: absolute;
+      width: 38px;
+      height: 12px;
+      background: #333;
+      top: -10px;
+      left: 15px;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .lens {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #111;
+      border: 6px solid #777;
+      left: 35px;
+      top: 15px;
+    }
+
+    .camera-label {
+      position: absolute;
+      top: 82px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 13px;
+      pointer-events: none;
+    }
+
+    .instructions {
+      position: absolute;
+      bottom: 30px;
+      left: 35px;
+      padding: 18px 22px;
+      width: 270px;
+      background: rgba(255,255,255,.86);
+      border-radius: 14px;
+      color: #3d5033;
+      box-shadow: 0 8px 25px rgba(0,0,0,.15);
+      z-index: 10;
+    }
+
+    .instructions strong {
+      font-size: 18px;
+    }
+
+    .instructions p {
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="garden">
+
+    <div class="title">
+      <h1>A little place for you ♡</h1>
+      <p>Take your time. There are a few things waiting for you here.</p>
+    </div>
+
+    <!-- Lantana -->
+    <div class="flower lantana" data-flower="Lantana">
+      <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="center"></div>
+    </div>
+
+    <!-- Chincherinchee -->
+    <div class="flower chincherinchee" data-flower="Chincherinchee">
+      <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="center"></div>
+    </div>
+
+    <!-- Damask Rose -->
+    <div class="flower rose" data-flower="Damask Rose">
+      <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="center"></div>
+    </div>
+
+    <!-- Perennial Aster -->
+    <div class="flower aster" data-flower="Perennial Aster">
+      <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="center"></div>
+    </div>
+
+    <!-- Camera -->
+    <div class="camera" id="camera">
+      <div class="lens"></div>
+      <div class="camera-label">drag me ♡</div>
+    </div>
+
+    <div class="instructions">
+      <strong>how this works</strong>
+      <p>
+        There's no rush here.<br>
+        Drag the camera around the garden.
+        Eventually, you'll find little things waiting for you.
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    const camera = document.getElementById("camera");
+
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    camera.addEventListener("pointerdown", (e) => {
+      dragging = true;
+
+      const rect = camera.getBoundingClientRect();
+
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+
+      camera.setPointerCapture(e.pointerId);
+    });
+
+    camera.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+
+      let x = e.clientX - offsetX;
+      let y = e.clientY - offsetY;
+
+      x = Math.max(0, Math.min(window.innerWidth - camera.offsetWidth, x));
+      y = Math.max(0, Math.min(window.innerHeight - camera.offsetHeight, y));
+
+      camera.style.left = x + "px";
+      camera.style.top = y + "px";
+      camera.style.right = "auto";
+    });
+
+    camera.addEventListener("pointerup", () => {
+      dragging = false;
+    });
+
+    document.querySelectorAll(".flower").forEach(flower => {
+      flower.addEventListener("click", () => {
+        alert("You found the " + flower.dataset.flower + " ♡");
+      });
+    });
+  </script>
+
+</body>
+</html>
