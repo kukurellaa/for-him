@@ -172,7 +172,7 @@ body {
 
 
 /* =========================================================
-   HOW THIS WORKS — BOTTOM LEFT
+   HOW THIS WORKS
 ========================================================= */
 
 .instructions {
@@ -310,7 +310,7 @@ body {
 
 
 /* =========================================================
-   FLOWER NAMES + MOOD
+   FLOWER NAMES + MOODS
 ========================================================= */
 
 .flower-name {
@@ -690,7 +690,6 @@ body {
 ========================================================= */
 
 .letter-wrapper {
-
     position: relative;
 
     width:
@@ -709,7 +708,6 @@ body {
 ========================================================= */
 
 .bookmarks {
-
     position: absolute;
 
     right: -108px;
@@ -725,7 +723,6 @@ body {
 }
 
 .bookmark {
-
     position: relative;
 
     width: 125px;
@@ -776,7 +773,6 @@ body {
 }
 
 .bookmark::after {
-
     content: "";
 
     position: absolute;
@@ -797,15 +793,24 @@ body {
         brightness(.75);
 }
 
-.bookmark-flower {
+
+/* GREEN — PERSONAL LETTER */
+
+.bookmark-letter {
     background: #789064;
     color: #789064;
 }
 
-.bookmark-letter {
+
+/* PINK — FLOWER INFORMATION */
+
+.bookmark-flower {
     background: #9d6a72;
     color: #9d6a72;
 }
+
+
+/* GOLD — DAMASK ROSE VIDEO */
 
 .bookmark-video {
     background: #8c7952;
@@ -818,7 +823,6 @@ body {
 ========================================================= */
 
 .letter {
-
     position: relative;
 
     width:
@@ -858,9 +862,6 @@ body {
    BOTANICAL BORDER
 ========================================================= */
 
-/* No rectangular border.
-   Only the botanical corner details remain. */
-
 .botanical-border {
     position: absolute;
 
@@ -871,12 +872,8 @@ body {
     border: none;
 }
 
-
-/* corner leaves */
-
 .botanical-border::before,
 .botanical-border::after {
-
     content:
         "❧";
 
@@ -893,7 +890,6 @@ body {
 }
 
 .botanical-border::before {
-
     top: 10px;
     left: 10px;
 
@@ -902,7 +898,6 @@ body {
 }
 
 .botanical-border::after {
-
     bottom: 10px;
     right: 10px;
 
@@ -911,10 +906,9 @@ body {
 }
 
 
-/* tiny white rose corners */
+/* tiny white roses */
 
 .white-rose {
-
     position: absolute;
 
     width: 27px;
@@ -962,7 +956,6 @@ body {
 }
 
 .letter h2 {
-
     margin:
         0 0 4px;
 
@@ -979,7 +972,6 @@ body {
 }
 
 .letter-subtitle {
-
     margin-bottom: 28px;
 
     font-family:
@@ -995,7 +987,6 @@ body {
 }
 
 .letter p {
-
     white-space: pre-line;
 
     font-family:
@@ -1010,7 +1001,7 @@ body {
 
 
 /* =========================================================
-   FLOWER INFORMATION PANEL
+   FLOWER INFORMATION
 ========================================================= */
 
 .flower-info {
@@ -1018,7 +1009,6 @@ body {
 }
 
 .flower-info.active {
-
     display: block;
 
     animation:
@@ -1027,7 +1017,7 @@ body {
 
 
 /* =========================================================
-   MY LETTER PANEL
+   PERSONAL LETTER
 ========================================================= */
 
 .my-letter {
@@ -1035,7 +1025,6 @@ body {
 }
 
 .my-letter.active {
-
     display: block;
 
     animation:
@@ -1044,7 +1033,7 @@ body {
 
 
 /* =========================================================
-   VIDEO PANEL
+   VIDEO
 ========================================================= */
 
 .video-panel {
@@ -1052,7 +1041,6 @@ body {
 }
 
 .video-panel.active {
-
     display: block;
 
     animation:
@@ -1060,7 +1048,6 @@ body {
 }
 
 .video-panel video {
-
     width: 100%;
 
     max-height: 400px;
@@ -1074,29 +1061,12 @@ body {
         rgba(0,0,0,.22);
 }
 
-.video-note {
-
-    margin-top: 15px;
-
-    font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
-
-    font-size: 18px;
-
-    font-style: italic;
-
-    color: #706d5d;
-}
-
 
 /* =========================================================
-   CLOSE BUTTON
+   CLOSE
 ========================================================= */
 
 .close-letter {
-
     margin-top: 25px;
 
     border: none;
@@ -1132,7 +1102,6 @@ body {
 @keyframes letterOpen {
 
     from {
-
         transform:
             translateY(15px)
             scale(.97);
@@ -1141,7 +1110,6 @@ body {
     }
 
     to {
-
         transform:
             translateY(0)
             scale(1);
@@ -1456,21 +1424,29 @@ body {
     class="letter-overlay"
     id="letterOverlay">
 
-
     <div class="letter-wrapper">
 
 
-        <!-- BOOKMARKS -->
+        <!-- =================================================
+             BOOKMARKS
+        ================================================== -->
 
         <div class="bookmarks">
+
+
+            <!-- PINK BOOKMARK -->
 
             <div
                 class="bookmark bookmark-flower"
                 data-tab="flower">
 
-                the flower
+                about this flower
 
             </div>
+
+
+            <!-- GREEN BOOKMARK
+                 YOUR PERSONAL LETTER — UNCHANGED -->
 
             <div
                 class="bookmark bookmark-letter"
@@ -1480,19 +1456,26 @@ body {
 
             </div>
 
+
+            <!-- GOLD BOOKMARK
+                 ONLY SHOWN FOR DAMASK ROSE -->
+
             <div
                 class="bookmark bookmark-video"
                 id="videoBookmark"
                 data-tab="video">
 
-                a little video
+                i love you
 
             </div>
+
 
         </div>
 
 
-        <!-- LETTER PAPER -->
+        <!-- =================================================
+             LETTER PAPER
+        ================================================== -->
 
         <div class="letter">
 
@@ -1506,9 +1489,9 @@ body {
             <div class="letter-content">
 
 
-                <!-- =====================================
+                <!-- =========================================
                      FLOWER INFORMATION
-                ====================================== -->
+                ========================================== -->
 
                 <div
                     class="flower-info active"
@@ -1528,9 +1511,12 @@ body {
                 </div>
 
 
-                <!-- =====================================
-                     YOUR LETTER
-                ====================================== -->
+                <!-- =========================================
+                     YOUR PERSONAL LETTER
+                     
+                     THIS SECTION IS YOURS.
+                     NOTHING HAS BEEN WRITTEN FOR YOU.
+                ========================================== -->
 
                 <div
                     class="my-letter"
@@ -1549,20 +1535,20 @@ body {
                 </div>
 
 
-                <!-- =====================================
-                     VIDEO
-                ====================================== -->
+                <!-- =========================================
+                     DAMASK ROSE VIDEO
+                ========================================== -->
 
                 <div
                     class="video-panel"
                     id="videoPanel">
 
                     <h2>
-                        a little something for you
+                        i love you
                     </h2>
 
                     <div class="letter-subtitle">
-                        watch this whenever you need it
+                        i love you
                     </div>
 
                     <video
@@ -1577,14 +1563,6 @@ body {
                         Your browser does not support video.
 
                     </video>
-
-                    <div class="video-note">
-
-                        I wanted you to have something
-                        you could come back to whenever
-                        you needed it.
-
-                    </div>
 
                 </div>
 
@@ -1672,10 +1650,10 @@ const flowerInformation = {
 
 /* =========================================================
    YOUR PERSONAL LETTERS
-=========================================================
 
    WRITE YOUR OWN LETTERS BETWEEN THE BACKTICKS.
 
+   NOTHING IS WRITTEN FOR YOU HERE.
 ========================================================= */
 
 const personalLetters = {
@@ -2075,6 +2053,8 @@ document
                 showTab("flower");
 
 
+                /* GOLD BOOKMARK ONLY FOR DAMASK ROSE */
+
                 if (
                     currentFlower === "rose"
                 ) {
@@ -2174,7 +2154,9 @@ function showTab(tab) {
 }
 
 
-/* bookmark clicks */
+/* =========================================================
+   BOOKMARK CLICKS
+========================================================= */
 
 document
     .querySelectorAll(".bookmark")
@@ -2207,7 +2189,7 @@ document
 
 
 /* =========================================================
-   CLOSE
+   CLOSE LETTER
 ========================================================= */
 
 closeLetter.addEventListener(
