@@ -289,23 +289,23 @@ body {
 ========================================================= */
 
 .lantana {
-    left: 21%;
-    top: 45%;
+    left: 27%;
+    top: 41%;
 }
 
 .chincherinchee {
-    left: 40%;
-    top: 27%;
+    left: 47%;
+    top: 19%;
 }
 
 .rose {
-    left: 63%;
+    left: 65%;
     top: 53%;
 }
 
 .aster {
-    left: 76%;
-    top: 24%;
+    left: 78%;
+    top: 25%;
 }
 
 
@@ -594,11 +594,6 @@ body {
 
 
 /* =========================================================
-   NO CAMERA LABEL
-========================================================= */
-
-
-/* =========================================================
    CAMERA TARGET
 ========================================================= */
 
@@ -717,24 +712,24 @@ body {
 
     position: absolute;
 
-    right: -2px;
-    top: 70px;
+    right: -108px;
+    top: 75px;
 
     display: flex;
 
     flex-direction: column;
 
-    gap: 12px;
+    gap: 14px;
 
-    z-index: -1;
+    z-index: 20;
 }
 
 .bookmark {
 
     position: relative;
 
-    width: 115px;
-    height: 48px;
+    width: 125px;
+    height: 52px;
 
     padding-left: 18px;
 
@@ -756,20 +751,23 @@ body {
     cursor: pointer;
 
     border-radius:
-        0 7px 7px 0;
+        0 8px 8px 0;
 
     box-shadow:
-        3px 5px 8px
-        rgba(0,0,0,.2);
+        4px 5px 10px
+        rgba(0,0,0,.22);
 
     transition:
         transform .25s ease,
-        right .25s ease;
+        filter .25s ease;
 }
 
 .bookmark:hover {
     transform:
         translateX(7px);
+
+    filter:
+        brightness(1.06);
 }
 
 .bookmark.active {
@@ -860,16 +858,17 @@ body {
    BOTANICAL BORDER
 ========================================================= */
 
+/* No rectangular border.
+   Only the botanical corner details remain. */
+
 .botanical-border {
     position: absolute;
 
-    inset: 15px;
-
-    border:
-        1px solid
-        rgba(91,112,75,.35);
+    inset: 0;
 
     pointer-events: none;
+
+    border: none;
 }
 
 
@@ -895,8 +894,8 @@ body {
 
 .botanical-border::before {
 
-    top: -14px;
-    left: -5px;
+    top: 10px;
+    left: 10px;
 
     transform:
         rotate(-15deg);
@@ -904,8 +903,8 @@ body {
 
 .botanical-border::after {
 
-    bottom: -15px;
-    right: -4px;
+    bottom: 10px;
+    right: 10px;
 
     transform:
         rotate(165deg);
@@ -1015,7 +1014,6 @@ body {
 ========================================================= */
 
 .flower-info {
-
     display: none;
 }
 
@@ -1033,7 +1031,6 @@ body {
 ========================================================= */
 
 .my-letter {
-
     display: none;
 }
 
@@ -1051,7 +1048,6 @@ body {
 ========================================================= */
 
 .video-panel {
-
     display: none;
 }
 
@@ -1253,6 +1249,7 @@ body {
 
     .bookmarks {
         right: -8px;
+        top: 65px;
     }
 
     .bookmark {
@@ -1262,6 +1259,11 @@ body {
     }
 
 }
+
+
+/* =========================================================
+   CAMERA / FLOWER SCRIPT
+========================================================= */
 
 </style>
 </head>
@@ -1527,7 +1529,7 @@ body {
 
 
                 <!-- =====================================
-                     MY LETTER
+                     YOUR LETTER
                 ====================================== -->
 
                 <div
@@ -1538,8 +1540,7 @@ body {
                         My Letter
                     </h2>
 
-                    <div
-                        class="letter-subtitle">
+                    <div class="letter-subtitle">
                         something I wanted you to have
                     </div>
 
@@ -1560,8 +1561,7 @@ body {
                         a little something for you
                     </h2>
 
-                    <div
-                        class="letter-subtitle">
+                    <div class="letter-subtitle">
                         watch this whenever you need it
                     </div>
 
@@ -1628,20 +1628,7 @@ const flowerInformation = {
             "a little flower for the days that feel heavy",
 
         text: `
-Lantana is a flower that grows in little clusters, with many small flowers gathered together.
-
-I thought that was a lovely way to think about university too. Sometimes everything can feel like it is piling up at once — assignments, deadlines, expectations, things you haven't figured out yet.
-
-But you don't have to carry all of it at the same time.
-
-Take one thing.
-
-Then another.
-
-And if today all you manage to do is breathe and get through the day, that's okay too.
-
-You don't have to have everything figured out right now.
-`
+        `
     },
 
 
@@ -1653,20 +1640,7 @@ You don't have to have everything figured out right now.
             "for when you're being harder on yourself than you should be",
 
         text: `
-Chincherinchee flowers grow together in little groups, and I think there's something really comforting about that.
-
-University can make you feel like you're supposed to know exactly what you're doing all the time.
-
-You're not.
-
-Not knowing something doesn't mean you're not capable.
-
-Having a difficult week doesn't mean you're falling behind in life.
-
-And struggling with something doesn't make you any less intelligent.
-
-I hope you remember that I see how hard you're trying, even on the days when you don't see it yourself.
-`
+        `
     },
 
 
@@ -1678,16 +1652,7 @@ I hope you remember that I see how hard you're trying, even on the days when you
             "for when you need a little reminder of us",
 
         text: `
-I chose the Damask Rose for this one because I wanted there to be something here that wasn't about university at all.
-
-Just us.
-
-Something you can come back to when you miss me, when you've had a long day, or when you just want to feel a little closer to me.
-
-There is a video waiting behind the other little bookmark too.
-
-I hope you like it.
-`
+        `
     },
 
 
@@ -1699,69 +1664,37 @@ I hope you like it.
             "for when everything feels like too much",
 
         text: `
-If you found this one, I think you probably need a moment to stop.
-
-So stop.
-
-You don't need to be productive right now.
-
-You don't need to answer every message.
-
-You don't need to figure out tomorrow tonight.
-
-Take a breath.
-
-Drink some water.
-
-Put your phone down for a little while if you need to.
-
-The world can wait.
-
-And when you feel ready, you can come back to everything one little thing at a time.
-
-I'm proud of you.
-`
+        `
     }
 
 };
 
 
 /* =========================================================
-   PERSONAL LETTERS
+   YOUR PERSONAL LETTERS
 =========================================================
 
-   THESE ARE PLACEHOLDERS FOR NOW.
+   WRITE YOUR OWN LETTERS BETWEEN THE BACKTICKS.
 
-   We'll replace them with your actual words.
 ========================================================= */
 
 const personalLetters = {
 
     lantana: `
-Write your personal Lantana letter here.
-
-This can be the really personal message from you to him about university, stress, and how much you believe in him.
-`,
+    
+    `,
 
     chincherinchee: `
-Write your personal Chincherinchee letter here.
-
-This one could be more about when he doubts himself or feels like he isn't doing enough.
-`,
+    
+    `,
 
     rose: `
-Write your personal Damask Rose letter here.
-
-This one can be completely about the two of you.
-
-You can make this one more romantic if you want.
-`,
+    
+    `,
 
     aster: `
-Write your personal Perennial Aster letter here.
-
-This one could be your softest letter — something he can read when he feels completely overwhelmed.
-`
+    
+    `
 
 };
 
@@ -1935,8 +1868,6 @@ function takePhoto(flower) {
     }
 
 
-    /* flash */
-
     flash.classList.remove(
         "active"
     );
@@ -1947,8 +1878,6 @@ function takePhoto(flower) {
         "active"
     );
 
-
-    /* unlock */
 
     flower.classList.remove(
         "locked"
@@ -1963,8 +1892,6 @@ function takePhoto(flower) {
         ".lock"
     ).textContent = "✓";
 
-
-    /* camera click */
 
     camera.style.transform =
         "scale(.93)";
@@ -2145,12 +2072,8 @@ document
                     ];
 
 
-                /* reset to flower tab */
-
                 showTab("flower");
 
-
-                /* video only belongs to rose */
 
                 if (
                     currentFlower === "rose"
